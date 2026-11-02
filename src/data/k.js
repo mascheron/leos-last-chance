@@ -1,0 +1,57 @@
+module.exports = [
+{id:"k1",f:"K",t:"Grundlagen",title:"Kriminalistik: Begriff & Aufgaben",norm:"§ 163 StPO · § 152 StPO",
+kurz:"Kriminalistik ist die Lehre von der Aufklärung und Verhütung von Straftaten. Sie gliedert sich in Kriminaltaktik, Kriminaltechnik und Kriminalstrategie.",
+punkte:["Kriminaltaktik: planmäßiges Vorgehen bei der Ermittlung (z. B. Vernehmung, Tatortarbeit)","Kriminaltechnik: naturwissenschaftlich-technische Spurensicherung und -auswertung","Kriminalstrategie: Lagebeurteilung, Schwerpunktsetzung, Prävention","Kriminologie: Ursachenforschung (Lehre vom Verbrechen) – nicht gleich Kriminalistik","Ermittlungsgrundsatz: Wer – Was – Wo – Wann – Wie – Womit – Warum – Wodurch (W-Fragen)"],
+merke:"Taktik · Technik · Strategie",
+cards:[["Drei Teilgebiete der Kriminalistik?","Kriminaltaktik, Kriminaltechnik, Kriminalstrategie."],["Unterschied Kriminalistik / Kriminologie?","Kriminalistik: praktische Aufklärung und Verhütung; Kriminologie: wissenschaftliche Ursachenforschung."]],
+quiz:[{q:"Welches Teilgebiet befasst sich mit naturwissenschaftlicher Spurenauswertung?",o:["Kriminaltaktik","Kriminaltechnik","Kriminalstrategie","Kriminalprävention"],a:1,e:"Kriminaltechnik = Spurensicherung und -auswertung."},{q:"Was erforscht die Kriminologie?",o:["Die Ursachen von Kriminalität","Tatortarbeit","Daktyloskopie","Vernehmungstechnik"],a:0,e:"Kriminologie = wissenschaftliche Ursachenforschung."}]},
+
+{id:"k2",f:"K",t:"Tatort",title:"Tatortarbeit: Sicherungsangriff & Spuren",norm:"§ 163 StPO · Kriminaltechnik",
+kurz:"Der erste Angriff am Tatort ist entscheidend: sichern, Rettung, Spurenschutz, Information. Spuren sind formal oder materiell.",
+punkte:["Sicherungsangriff: Menschenrettung → Gefahrenabwehr → Tatortabsperrung → Spurenschutz → Meldung","Tatort = Ort der Handlung und des Erfolgs (§ 9 StGB), Fundort, Auffindeort","Formspur: Abbildung einer Form (Fußabdruck, Werkzeugspur)","Materialspur: Substanz (Blut, Haare, Fasern, Glas)","Kontaktspuren: Locard-Prinzip („Jeder Kontakt hinterlässt Spuren“)","Spurenträger beachten, nichts verändern, unverfälscht sichern, Kette der Asservierung dokumentieren","Dokumentation: Fotos, Skizze, Protokoll, Spurenverzeichnis"],
+merke:"Retten · Sichern · Sehen · Sichern · Melden",
+cards:[["Formspur vs. Materialspur?","Formspur: Abdruck/Form; Materialspur: übertragene Stoffe (z. B. Blut, Fasern)."],["Locard’sches Austauschprinzip?","Jeder Kontakt zwischen Täter, Opfer und Tatort führt zu gegenseitigem Spurenaustausch."],["Was ist ein Sicherungsangriff?","Erste Maßnahmen am Tatort: Rettung, Gefahrenabwehr, Absperrung, Spurenschutz, Meldung."]],
+quiz:[{q:"Der Abdruck eines Schuhs im Boden ist eine …",o:["Materialspur","Formspur","Mikrospur","Indizienspur"],a:1,e:"Formspur = Abbildung der Form."},{q:"Was hat am Tatort zuerst Vorrang?",o:["Spurenfotografie","Rettung von Menschenleben","Vernehmung des Zeugen","Spurenvergleich"],a:1,e:"Menschenrettung/Gefahrenabwehr vor Spurensicherung."}]},
+
+{id:"k3",f:"K",t:"Kriminaltechnik",title:"Daktyloskopie & DNA-Analyse",norm:"§ 81b, §§ 81e–81g StPO",
+kurz:"Fingerabdrücke (Daktyloskopie) und DNA-Profile sind zentrale Beweismittel zur Identifizierung. Ihre Gewinnung unterliegt strengen Voraussetzungen.",
+punkte:["Daktyloskopie: Papillarlinien (Hautleisten), unveränderlich, individuell","Grundmuster: Schleife, Wirbel, Bogen","Fingerabdruckspuren: latent (unsichtbar), patent (sichtbar), plastisch","Sicherung: Pulver, chemisch, Fotografie, Abklebung","DNA-Analyse: § 81e StPO Untersuchung von Spurenmaterial, § 81g StPO DNA-Identitätsfeststellung für künftige Verfahren","Molekulargenetische Untersuchung: nur Feststellung von Abstammung/Geschlecht/Identität, keine Persönlichkeitsmerkmale","Richtervorbehalt bei DNA-Entnahme (§ 81f StPO), schriftliche Einwilligung möglich"],
+merke:"Hautleisten bleiben ein Leben lang",
+cards:[["Drei Grundmuster der Fingerabdrücke?","Schleife, Wirbel, Bogen."],["Was ist ein latenter Abdruck?","Mit bloßem Auge nicht sichtbarer Abdruck, wird erst durch Behandlung (z. B. Pulver) sichtbar."],["Darf mit DNA-Analyse auf Krankheiten geschlossen werden?","Nein, § 81e StPO erlaubt nur Identität, Abstammung, Geschlecht – keine Persönlichkeitsmerkmale."]],
+quiz:[{q:"Wo ist die molekulargenetische Untersuchung geregelt?",o:["§ 81e StPO","§ 163b StPO","§ 127 StPO","§ 136 StPO"],a:0,e:"§ 81e StPO regelt die molekulargenetische Untersuchung."},{q:"Grundmuster der Papillarlinien sind …",o:["Schleife, Wirbel, Bogen","Kreis, Dreieck, Linie","Punkt, Haken, Strich","Spirale, Welle, Kreuz"],a:0,e:"Die klassischen Grundmuster: Schleife, Wirbel, Bogen."}]},
+
+{id:"k4",f:"K",t:"Ermittlung",title:"Beweismittel & Beweisverwertung",norm:"§§ 94 ff., 136a, 244 StPO",
+kurz:"Beweismittel sind Zeuge, Sachverständiger, Augenschein, Urkunde und Beschuldigtenaussage. Verbotene Methoden führen zu Beweisverwertungsverboten.",
+punkte:["Strengbeweis: Zeugen, Sachverständige, Augenschein, Urkunden (§ 244 StPO), Beschuldigteneinlassung","Beschlagnahme § 94 StPO, Durchsuchung §§ 102 ff. StPO (Richter, bei Gefahr im Verzug StA/Ermittlungspersonen)","Verbotene Vernehmungsmethoden § 136a StPO: Misshandlung, Ermüdung, Täuschung, Drohung, Hypnose, Lügendetektor u. a.","Beweiserhebungsverbote: Gegenstand, Beweismittel, Methode","Beweisverwertungsverbote: Fernwirkung („Früchte des vergifteten Baumes“) nur eingeschränkt","Zufallsfunde § 108 StPO"],
+merke:"Verbotene Methode = Aussage nicht verwertbar",
+cards:[["Welche Norm verbietet bestimmte Vernehmungsmethoden?","§ 136a StPO."],["Wer ordnet Durchsuchungen grundsätzlich an?","Der Richter (§ 105 StPO); bei Gefahr im Verzug auch StA und Ermittlungspersonen."]],
+quiz:[{q:"Welche Methode ist nach § 136a StPO verboten?",o:["Offene Befragung","Täuschung über Rechtslage","Belehrung","Aufforderung zur Aussage"],a:1,e:"Täuschung, Misshandlung, Drohung, Versprechen gesetzlich nicht vorgesehener Vorteile verboten."},{q:"Wer ordnet eine Durchsuchung grundsätzlich an?",o:["Der Dienststellenleiter","Der Richter","Der Zeuge","Der Verteidiger"],a:1,e:"§ 105 StPO: Richterliche Anordnung als Regel."}]},
+
+{id:"k5",f:"K",t:"Ermittlung",title:"Vernehmung & Belehrung",norm:"§§ 136, 163a, 52, 55 StPO",
+kurz:"Beschuldigte sind vor der ersten Vernehmung zu belehren: Tatvorwurf, Aussagefreiheit, Verteidigerkonsultation. Zeugen haben Zeugnis- und Auskunftsverweigerungsrechte.",
+punkte:["Beschuldigtenbelehrung § 136 StPO (i. V. m. § 163a Abs. 4): Tat, Strafvorschriften, Recht zu schweigen, Verteidigerbefragung, Beweisanträge","Verstoß: Verwertungsverbot der Aussage","Zeugnisverweigerungsrecht Angehörige: § 52 StPO","Auskunftsverweigerung bei Selbstbelastungsgefahr: § 55 StPO","Qualifizierte Belehrung nach Verstoß: Nachholen bei späterer Vernehmung","Vernehmungsphasen: Einleitung, Personalien, Sachverhalt, Abschluss","Vernehmungstaktik: offene Fragen, Vorhalte, keine Suggestivfragen"],
+merke:"Schweigen · Verteidiger · Tatvorwurf",
+cards:[["Rechte des Beschuldigten nach § 136 StPO?","Schweigerecht, Recht auf Verteidiger, Recht auf Beweisanträge, Kenntnis des Tatvorwurfs."],["Wer darf nach § 52 StPO das Zeugnis verweigern?","Angehörige des Beschuldigten (Verlobte, Ehegatten, Verwandte in gerader Linie u. a.)."],["Was sichert § 55 StPO?","Auskunftsverweigerungsrecht bei Gefahr der Selbstbelastung für Zeugen."]],
+quiz:[{q:"Wann sind Beschuldigte zu belehren?",o:["Vor der ersten Vernehmung","Nach dem Urteil","Nur bei Verbrechen","Nur auf Antrag"],a:0,e:"§ 136 StPO: zu Beginn der ersten Vernehmung."},{q:"Welche Norm regelt das Zeugnisverweigerungsrecht Angehöriger?",o:["§ 52 StPO","§ 55 StPO","§ 94 StPO","§ 127 StPO"],a:0,e:"§ 52 StPO."}]},
+
+{id:"k6",f:"K",t:"Fahndung",title:"Fahndung & Informationsmanagement",norm:"§§ 131 ff. StPO · Fahndungsrichtlinien",
+kurz:"Fahndung dient der Ergreifung von Personen oder dem Auffinden von Sachen. Sie umfasst Festnahme-, Aufenthaltsermittlungs-, Sachfahndung.",
+punkte:["Fahndungsarten: Personen-, Sachfahndung; Aufenthaltsermittlung","Fahndungsmittel: INPOL, SIS, Kennzeichenerfassung, Öffentlichkeitsfahndung","Öffentlichkeitsfahndung §§ 131 ff. StPO: besondere Voraussetzungen, Richtervorbehalt (§ 131c)","Ausschreibung zur Festnahme § 131 StPO (Haftbefehl), Ausschreibung zur Aufenthaltsermittlung § 131a","Beobachtende Fahndung § 163e StPO","Fahndung im Verbund: Länder, Bund, Europa"],
+merke:"Fahndung = Findung",
+cards:[["Welches Datenverbundsystem unterstützt die polizeiliche Fahndung?","INPOL (national), SIS (Schengen)."],["§ 163e StPO?","Ausschreibung zur polizeilichen Beobachtung."]],
+quiz:[{q:"Wozu dient die Aufenthaltsermittlung?",o:["Festnahme eines Beschuldigten","Auffinden von Zeugen oder Personen","Beschlagnahme","Telefonüberwachung"],a:1,e:"Aufenthaltsermittlung = Auffinden z. B. von Zeugen."},{q:"Wer ordnet Öffentlichkeitsfahndung grundsätzlich an?",o:["Der Richter","Der Streifenpolizist","Die Presse","Der Zeuge"],a:0,e:"Öffentlichkeitsfahndung unterliegt grundsätzlich dem Richtervorbehalt (§ 131c StPO; bei Gefahr im Verzug StA)."}]},
+
+{id:"k7",f:"K",t:"Kriminalität",title:"PKS, Hellfeld & Dunkelfeld",norm:"Polizeiliche Kriminalstatistik",
+kurz:"Die PKS erfasst die der Polizei bekannt gewordenen Straftaten (Hellfeld). Das Dunkelfeld bleibt unbekannt und wird durch Dunkelfeldstudien erforscht.",
+punkte:["Hellfeld: der Polizei bekannt gewordene Straftaten","Dunkelfeld: nicht angezeigte oder unentdeckte Taten","PKS = Ausgangsstatistik der Polizei (Anzeigestatistik), keine Verurteilungen","Aufklärungsquote = aufgeklärte Fälle / bekannt gewordene Fälle","Tatverdächtige ≠ Täter; Unschuldsvermutung","Kriminalitätsentwicklung: Hellfeld wird durch Anzeigeverhalten beeinflusst","Dunkelfeldforschung: Opferbefragungen, Täterbefragungen"],
+merke:"PKS = Hellfeld",
+cards:[["Was misst die PKS?","Die der Polizei bekannt gewordenen Straftaten – das Hellfeld."],["Aufklärungsquote berechnen?","Aufgeklärte Fälle geteilt durch bekannt gewordene Fälle (in Prozent)."]],
+quiz:[{q:"Die PKS bildet vorrangig ab:",o:["Das Dunkelfeld","Das Hellfeld","Gerichtsurteile","Strafvollzug"],a:1,e:"PKS = polizeilich bekannte Fälle."},{q:"Wie wird das Dunkelfeld erforscht?",o:["Opferbefragungen","Gerichtsstatistik","Haftbefehle","PKS-Tabellen"],a:0,e:"Dunkelfeldstudien befragen Bevölkerung zu Opfererfahrungen."}]},
+
+{id:"k8",f:"K",t:"Kriminalität",title:"Kriminalprävention",norm:"SächsPVDG (Aufgaben) · Polizeiliche Kriminalprävention der Länder",
+kurz:"Prävention verhindert Straftaten durch Information, Beratung, Technik und Täterbeeinflussung.",
+punkte:["Primärprävention: Allgemeinheit, Aufklärung, Verhaltenshinweise","Sekundärprävention: Gefährdete Gruppen/Orte","Tertiärprävention: Rückfallverhinderung bei Tätern","Verhaltens- und Verhältnisprävention (Verhalten ändern vs. Umgebung/Technik)","Kriminalpräventive Räte, Beratungsstellen, Opferschutz","Situative Kriminalprävention (z. B. Beleuchtung, Zugangskontrolle)"],
+merke:"Primär · Sekundär · Tertiär",
+cards:[["Was ist Tertiärprävention?","Maßnahmen gegen Rückfälle bereits straffällig gewordener Personen."],["Verhaltens- vs. Verhältnisprävention?","Verhaltensprävention beeinflusst Menschen; Verhältnisprävention gestaltet Umgebung/Technik."]],
+quiz:[{q:"Beleuchtung an Hotspots ist …",o:["Verhaltensprävention","Verhältnisprävention","Tertiärprävention","Repression"],a:1,e:"Umgebungsgestaltung = Verhältnisprävention."},{q:"Primärprävention richtet sich an …",o:["Verurteilte Täter","Die Allgemeinheit","Opfer nach der Tat","Gerichte"],a:1,e:"Primär = Allgemeinheit/breite Bevölkerung."}]}
+];
