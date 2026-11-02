@@ -16,18 +16,19 @@ h1,h2,h3,.serif{font-family:"Fraunces","Source Serif 4",Georgia,serif;font-weigh
 a{color:var(--accent)}button{font:inherit;cursor:pointer}
 .skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:var(--card);padding:6px 10px;z-index:99}
 header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.hb{display:flex;align-items:center;gap:14px;padding:10px 16px;max-width:1280px;margin:auto;flex-wrap:wrap}
+.hb{display:flex;align-items:center;gap:10px;padding:10px 16px;max-width:1280px;margin:auto;flex-wrap:wrap}
 .logo{font-family:Georgia,serif;font-weight:700;font-size:1.15rem;text-decoration:none;color:var(--ink);display:flex;gap:8px;align-items:center}
 .logo b{color:var(--accent)}.lg{width:30px;height:30px;flex:none}.lg.big{width:72px;height:72px}
 nav{display:flex;gap:4px;flex-wrap:wrap}
-nav a{padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-size:.92rem}
+nav a{padding:6px 9px;border-radius:999px;text-decoration:none;color:var(--ink);font-size:.9rem}
 nav a[aria-current=page],nav a:hover{background:var(--accent);color:#fff}
 .sp{flex:1}
-#q{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 12px;border-radius:10px;min-width:170px}
+#q{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 12px;border-radius:10px;min-width:140px}
 .ring{width:42px;height:42px}.ring text{font:700 11px Inter,sans-serif;fill:var(--ink)}
 .ib{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:7px 10px}
 .filters{max-width:1280px;margin:auto;padding:8px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .gl{color:inherit;text-decoration:none;border-bottom:1.5px dotted var(--accent)}.gl:hover{background:color-mix(in srgb,var(--accent) 15%,transparent)}.pl{color:var(--accent);text-decoration:underline dotted}.ge{scroll-margin-top:90px}.ge.hl{outline:2px solid var(--accent);border-radius:10px}.q-G{background:#2e7d32}.q-L{background:#b26a00}.q-T{background:#8a8a8a}
+.wideonly{display:none}@media(min-width:861px){.wideonly{display:block}.layout.nolist{grid-template-columns:1fr}.layout.nolist .tree{display:none}.layout.nolist>article{max-width:900px;width:100%;margin:0 auto}}
 .mt{display:none}.tsum{cursor:pointer;font-weight:600;padding:6px 4px;list-style:none}.tree details>summary::-webkit-details-marker{display:none}
 @media(min-width:721px){.tsum{display:none}}
 @keyframes hin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
@@ -211,17 +212,19 @@ function vStart(){const l=nuggets(),qd=ALLQ.length,qc=ALLQ.length-S.w.length;
  ${S.w.length?`<p><a class="btn r" href="#/wdh">${S.w.length} falsche Fragen wiederholen</a></p>`:`<p class="mot">${S.a?"Keine offenen Fehler – stark! 🎯":"Starte mit dem ersten Nugget."}</p>`}</div></section>
  <section class="grid3">${["ER","K","V"].map(k=>{const L=N.filter(n=>n.f===k);const q=ALLQ.filter(x=>x.f===k);return `<article class="card fach" style="--c:${FACH[k].c}" tabindex="0" role="link" data-go="#/atlas/${L[0].id}"><div style="font-size:2rem">${FACH[k].icon}</div><h3>${FACH[k].n}</h3><small>${FACH[k].d}</small><div class="bar" style="margin:12px 0"><i style="width:${pct(L)}%"></i></div><small>${L.filter(n=>S.d.includes(n.id)).length}/${L.length} Nuggets · ${q.length} Fragen · ${ALLC.filter(c=>c.f===k).length} Karten</small></article>`}).join("")}</section>
  <section class="card" style="margin-top:20px"><h3 style="margin-top:0">Lernlandkarte <small class="norm">(${l.length} Nuggets im Filter · ausgefüllt = gelernt)</small></h3>${heat(l)}</section>`}
+let treeHidden=false;
 function vAtlas(id){const l=nuggets();let n=byId[id]||l[0]||N[0];
  const groups={};l.forEach(x=>{(groups[x.f]=groups[x.f]||{});(groups[x.f][x.t]=groups[x.f][x.t]||[]).push(x)});
  let tree="";for(const f of ["ER","K","V"]){if(!groups[f])continue;tree+=`<div style="--c:${FACH[f].c}"><h4>${FACH[f].icon} ${FACH[f].n}</h4>`;for(const t in groups[f]){tree+=`<div style="padding-left:6px;font-size:.78rem;color:var(--mute);margin-top:6px">${esc(t)}</div>`+groups[f][t].map(x=>`<a href="#/atlas/${x.id}" class="${x.id===n.id?"on":""}" style="--c:${FACH[f].c}"><span class="dot ${S.d.includes(x.id)?"d":""}"></span>${esc(x.title)}</a>`).join("")}tree+="</div>"}
  if(!tree)tree="<p style='padding:8px'>Keine Nuggets für diesen Filter.</p>";
  const c=FACH[n.f].c,done=S.d.includes(n.id),i=N.indexOf(n);
  const seen=new Set(),dl=defLaw(n),RO=x=>rich(x,{seen,law:dl}),relc=(REL[n.id]||[]).map(i=>byId[i]).filter(Boolean),glc=GLOS.filter(e=>e[3].includes(n.id));
- $("#main").innerHTML=`<div class="layout"><aside class="tree" aria-label="Themenbaum"><details ${mq.matches?"":"open"}><summary class="tsum">📚 Themenbaum · ${esc(n.title)}</summary>${tree}</details></aside><article class="card" style="--c:${c}"><span class="tag">${FACH[n.f].n}</span><span class="tag" style="background:var(--mute)">${esc(n.t)}</span><h2 style="font-size:1.8rem;margin:.3em 0">${esc(n.title)}</h2><div class="norm">${esc(n.norm)}</div>
+ $("#main").innerHTML=`<div class="layout${treeHidden?" nolist":""}"><aside class="tree" aria-label="Themenbaum"><details ${mq.matches?"":"open"}><summary class="tsum">📚 Themenbaum · ${esc(n.title)}</summary>${tree}</details></aside><article class="card" style="--c:${c}">${treeHidden?`<p class="wideonly" style="margin:0 0 10px"><button class="btn s" id="showtree">📚 Themenbaum einblenden</button></p>`:""}<span class="tag">${FACH[n.f].n}</span><span class="tag" style="background:var(--mute)">${esc(n.t)}</span><h2 style="font-size:1.8rem;margin:.3em 0">${esc(n.title)}</h2><div class="norm">${esc(n.norm)}</div>
  <h3>Kurzfassung</h3><p>${RO(n.kurz)}</p>${n.hinweis?`<div class="notice" style="border-style:solid;border-color:var(--c)">⚠️ <b>Hinweis:</b> ${esc(n.hinweis)}</div>`:""}<h3>Das musst du wissen</h3><ul class="kp">${n.punkte.map(p=>`<li>${RO(p)}</li>`).join("")}</ul><div class="merke">💡 <b>Merke:</b> ${RO(n.merke)}</div>${relc.length?`<h3>Verwandte Nuggets</h3><div class="row" style="gap:6px">${relc.map(x=>`<a class="chip" style="--c:${FACH[x.f].c};text-decoration:none;border-color:${FACH[x.f].c}" href="#/atlas/${x.id}">${FACH[x.f].icon} ${esc(x.title)}</a>`).join("")}</div>`:""}${glc.length?`<h3>Begriffe im Glossar</h3><div class="row" style="gap:6px">${glc.map(e=>`<a class="chip" style="text-decoration:none" href="#/glossar/${gslug(e[0])}">📖 ${esc(e[0])}</a>`).join("")}</div>`:""}${PROWS.some(c=>c.n===n.id)?`<h3>Paragrafen-Lernkarten</h3><div class="row" style="gap:6px">${PROWS.filter(c=>c.n===n.id).map(c=>`<a class="chip" style="--c:var(--accent);text-decoration:none" href="#/cards/${c.id}" title="${esc(c.t)}">${LAW[c.law].s} § ${esc(c.nr)}</a>`).join("")}</div>`:""}
  <h3>Prüfungsfragen</h3>${n.cards.map(x=>`<details style="margin:6px 0"><summary><b>${esc(x.q)}</b></summary><p style="margin:.4em 0 .8em">${RO(x.a)}</p></details>`).join("")}
  <div class="row" style="margin-top:18px"><button class="btn ${done?"s":"g"}" id="done">${done?"✓ Gelernt (zurücknehmen)":"Als gelernt markieren"}</button><a class="btn" href="#/quiz/${n.id}">Quiz zu diesem Nugget</a><a class="btn s" href="#/cards/${n.id}">Karten</a></div>
  <div class="row" style="margin-top:14px;justify-content:space-between">${N[i-1]?`<a href="#/atlas/${N[i-1].id}">← ${esc(N[i-1].title)}</a>`:"<span></span>"}${N[i+1]?`<a href="#/atlas/${N[i+1].id}">${esc(N[i+1].title)} →</a>`:""}</div></article></div>`;
+ document.querySelectorAll(".tree a").forEach(a=>a.addEventListener("click",()=>{treeHidden=true}));const st=$("#showtree");if(st)st.onclick=()=>{treeHidden=false;vAtlas(n.id)};
  $("#done").onclick=()=>{if(done)S.d=S.d.filter(x=>x!==n.id);else{S.d.push(n.id);addXp(15);toast(PRAISE[Math.floor(Math.random()*PRAISE.length)]);if(pct(N.filter(x=>x.f===n.f))===100){toast("🏆 Fach "+FACH[n.f].n+" komplett!");confetti()}}touch();save();paint();vAtlas(n.id)}}
 function vParas(){
  const TH=[["⚖️ Polizei- & Ordnungsrecht (Sachsen)",["SächsPVDG","SächsPBG"]],["🔎 Strafprozessrecht",["StPO","GVG","RiStBV"]],["🧑‍⚖️ Strafrecht",["StGB","JGG"]],["📋 Ordnungswidrigkeitenrecht",["OWiG"]],["🚗 Straßenverkehrsrecht",["StVG","StVO","FeV","StVZO","FZV","PflVG","BKatV"]],["🏛️ Verfassungs- & Verwaltungsrecht",["GG","EMRK","VwVfG","VwGO","SächsVwVG"]],["🧪 Kriminalistik, Lehre & Sonstiges",[]]];
@@ -288,7 +291,7 @@ function vSearch(t){t=t.toLowerCase();const r=N.filter(n=>(n.title+" "+n.norm+" 
  $("#main").innerHTML=`<div class="card"><h2 style="margin-top:0">Suche: „${esc(t)}“ <small class="norm">${r.length} Nuggets · ${pr.length} Paragrafen</small></h2>${pr.map(c=>`<p style="margin:.2em 0"><a class="chip" style="--c:var(--accent);text-decoration:none" href="#/cards/${c.id}">${LAW[c.law].s} § ${esc(c.nr)}</a> ${esc(c.t)}</p>`).join("")}${r.map(n=>`<p><a href="#/atlas/${n.id}"><span class="tag" style="--c:${FACH[n.f].c}">${n.f}</span>${esc(n.title)}</a><br><small class="norm">${esc(n.norm)}</small></p>`).join("")||"Keine Treffer."}</div>`}
 // ---------- Router ----------
 function route(){const [,r,id]=location.hash.split("/");paint();window.scrollTo(0,0);
- if(r==="atlas")vAtlas(id);else if(r==="cards")vCards(id);else if(r==="polizeirecht")vPol(id);else if(r==="paras")vParas();else if(r==="glossar")vGlossar(id);else if(r==="stoff")vStoff();else if(r==="quiz")vQuiz(id);else if(r==="wdh")vWdh();else vStart();
+ if(r==="atlas"&&!id)treeHidden=false;if(r==="atlas")vAtlas(id);else if(r==="cards")vCards(id);else if(r==="polizeirecht")vPol(id);else if(r==="paras")vParas();else if(r==="glossar")vGlossar(id);else if(r==="stoff")vStoff();else if(r==="quiz")vQuiz(id);else if(r==="wdh")vWdh();else vStart();
  document.querySelectorAll("[data-go]").forEach(e=>{e.onclick=()=>location.hash=e.dataset.go;e.onkeydown=k=>{if(k.key==="Enter")location.hash=e.dataset.go}})}
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{const t=e.target.tagName;if(e.key==="/"&&t!=="INPUT"){e.preventDefault();$("#q").focus()}
