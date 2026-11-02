@@ -1,4 +1,4 @@
-# Leos Last Chance
+# Lernatlas
 
 Interaktiver Lernatlas mit Flashcards und Quiz für die Zwischenprüfungen der Polizei Sachsen (Eingriffsrecht, Kriminalistik, Verkehrsrecht).
 

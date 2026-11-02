@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Leos Last Chance – Lernatlas Zwischenprüfungen Polizei Sachsen</title>
-<meta name="description" content="Interaktiver Lernatlas mit Flashcards und Quiz für Eingriffsrecht, Kriminalistik und Verkehrsrecht (Zwischenprüfungen Polizei Sachsen).">
+<title>Lernatlas – Zwischenprüfungen Polizei Sachsen</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23274b7a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2314284a%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath%20d%3D%22M32%203%2056%2011v21c0%2014-10%2024-24%2029C18%2056%208%2046%208%2032V11z%22%20fill%3D%22url%28%23g%29%22%20stroke%3D%22%23d4a82a%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M32%2012l3.2%208.4%208.8%203.6-8.8%203.6L32%2036l-3.2-8.4L20%2024l8.8-3.6z%22%20fill%3D%22%23d4a82a%22/%3E%3Cpath%20d%3D%22M15%2040q8-3.6%2017%20.8v13q-9-4.4-17-1z%22%20fill%3D%22%23f6f3ec%22/%3E%3Cpath%20d%3D%22M49%2040q-8-3.6-17%20.8v13q9-4.4%2017-1z%22%20fill%3D%22%23dfe6f0%22/%3E%3Cpath%20d%3D%22M32%2041v13%22%20stroke%3D%22%2314284a%22%20stroke-width%3D%221.4%22/%3E%3C/svg%3E">
+<meta name="description" content="Lernatlas: interaktiv mit Flashcards und Quiz für Eingriffsrecht, Kriminalistik und Verkehrsrecht (Zwischenprüfungen Polizei Sachsen).">
 <meta name="robots" content="noindex">
 <style>
 :root{--bg:#f6f3ec;--card:#fffdf8;--ink:#1f2430;--mute:#6b7280;--line:#e4ded0;--accent:#1d4e89;--ok:#2f7d4f;--bad:#b3362f;--er:#b3362f;--k:#6a4c93;--v:#1d7a8c;--sh:0 8px 28px rgba(31,36,48,.08)}
@@ -17,7 +18,7 @@ a{color:var(--accent)}button{font:inherit;cursor:pointer}
 header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .hb{display:flex;align-items:center;gap:14px;padding:10px 16px;max-width:1280px;margin:auto;flex-wrap:wrap}
 .logo{font-family:Georgia,serif;font-weight:700;font-size:1.15rem;text-decoration:none;color:var(--ink);display:flex;gap:8px;align-items:center}
-.logo b{color:var(--accent)}
+.logo b{color:var(--accent)}.lg{width:30px;height:30px;flex:none}.lg.big{width:72px;height:72px}
 nav{display:flex;gap:4px;flex-wrap:wrap}
 nav a{padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-size:.92rem}
 nav a[aria-current=page],nav a:hover{background:var(--accent);color:#fff}
@@ -93,7 +94,7 @@ footer a,footer button{color:var(--mute);background:none;border:0;padding:0;font
 <a class="skip" href="#main">Zum Inhalt</a>
 <header>
  <div class="hb">
-  <a class="logo" href="#/" aria-label="Startseite">🛡️ <span>Leos <b>Last Chance</b></span></a>
+  <a class="logo" href="#/" aria-label="Startseite"><svg class="lg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#274b7a"/><stop offset="1" stop-color="#14284a"/></linearGradient></defs><path d="M32 3 56 11v21c0 14-10 24-24 29C18 56 8 46 8 32V11z" fill="url(#gl)" stroke="#d4a82a" stroke-width="3" stroke-linejoin="round"/><path d="M32 12l3.2 8.4 8.8 3.6-8.8 3.6L32 36l-3.2-8.4L20 24l8.8-3.6z" fill="#d4a82a"/><path d="M15 40q8-3.6 17 .8v13q-9-4.4-17-1z" fill="#f6f3ec"/><path d="M49 40q-8-3.6-17 .8v13q9-4.4 17-1z" fill="#dfe6f0"/><path d="M32 41v13" stroke="#14284a" stroke-width="1.4"/></svg><span><b>Lern</b>atlas</span></a>
   <nav aria-label="Hauptnavigation" id="nav"></nav>
   <span class="sp"></span>
   <input id="q" type="search" placeholder="Suchen  ( / )" aria-label="Suche">
@@ -127,7 +128,7 @@ const ALLQ=N.flatMap(n=>n.quiz),ALLC=N.flatMap(n=>n.cards);
 const LEVELS=["Anwärter","Streifenneuling","Polizeimeister-Anwärter","Polizeimeister","Obermeister","Hauptmeister","Kommissar-Anwärter","Kommissar","Leo – Legende"];
 const PRAISE=["Stark! 💪","Sauber gelöst!","Das sitzt!","Genau so! 🎯","Top – weiter so!","Prüfungsreif! ✅"];
 const NUDGE=["Nicht schlimm – Fehler sind Lernchancen. Die Frage kommt wieder.","Gleich nochmal – beim zweiten Mal sitzt es.","Merk dir die Begründung, dann klappt’s."];
-const MOT=["Jeder Tag zählt – heute ein Nugget mehr als gestern.","Du musst nicht perfekt sein, nur besser als gestern.","Kleine Schritte, große Prüfung bestanden.","Wiederholen schlägt Pauken. Bleib dran!","Leos letzte Chance? Deine erste Chance, es richtig zu machen."];
+const MOT=["Jeder Tag zählt – heute ein Nugget mehr als gestern.","Du musst nicht perfekt sein, nur besser als gestern.","Kleine Schritte, große Prüfung bestanden.","Wiederholen schlägt Pauken. Bleib dran!","Heute lernen, morgen sicher auftreten."];
 // ---------- State ----------
 let S={d:[],w:[],k:[],x:0,s:0,l:"",t:"",a:0,r:0},consent=null,F={f:["ER","K","V"],st:"all"},mem=false;
 function ck(n){const m=document.cookie.split("; ").find(r=>r.startsWith(n+"="));return m?decodeURIComponent(m.slice(n.length+1)):null}
@@ -150,14 +151,14 @@ function chips(){$("#chips").innerHTML=["ER","K","V"].map(k=>`<button class="chi
 document.addEventListener("click",e=>{const b=e.target.closest("[data-f],[data-s]");if(!b)return;
  if(b.dataset.f==="all")F.f=["ER","K","V"];else if(b.dataset.f){const k=b.dataset.f;if(F.f.length===3)F.f=[k];else if(F.f.includes(k)){F.f=F.f.filter(x=>x!==k);if(!F.f.length)F.f=["ER","K","V"]}else F.f.push(k)}
  if(b.dataset.s)F.st=b.dataset.s;chips();route()});
-function nav(){const r=(location.hash.split("/")[1]||"");$("#nav").innerHTML=[["","Start"],["atlas","Lernatlas"],["cards","Flashcards"],["quiz","Quiz"],["wdh","Wiederholen"+(S.w.length?" ("+S.w.length+")":"")]].map(([h,l])=>`<a href="#/${h}" ${r===h?'aria-current="page"':""}>${l}</a>`).join("")}
+function nav(){const r=(location.hash.split("/")[1]||"");$("#nav").innerHTML=[["","Start"],["atlas","Lernatlas"],["cards","Flashcards"],["paras","Paragrafen"],["quiz","Quiz"],["wdh","Wiederholen"+(S.w.length?" ("+S.w.length+")":"")]].map(([h,l])=>`<a href="#/${h}" ${r===h?'aria-current="page"':""}>${l}</a>`).join("")}
 function paint(){const all=N,p=pct(all);$("#ringc").style.strokeDashoffset=107-107*p/100;$("#ringt").textContent=p+"%";nav()}
 // ---------- Views ----------
 function heat(list){return `<div class="heat">`+list.map((n,i)=>`<a href="#/atlas/${n.id}" class="${S.d.includes(n.id)?"d":""}" style="--c:${FACH[n.f].c}" title="${esc(n.title)}">${i+1}</a>`).join("")+`</div>`}
 function vStart(){const l=nuggets(),qd=ALLQ.length,qc=ALLQ.length-S.w.length;
  const xp=S.x%100;
- $("#main").innerHTML=`<section class="hero"><div class="card"><div class="tag" style="--c:var(--accent)">Zwischenprüfungen · Polizei Sachsen · LG 1.2 POL</div><h1>Leos <em style="color:var(--accent)">Last Chance</em></h1><p class="mot">${esc(MOT[new Date().getDate()%MOT.length])}</p><div class="row"><a class="btn" href="#/atlas">Lernatlas öffnen</a><a class="btn s" href="#/cards">Flashcards</a><a class="btn s" href="#/quiz">Quiz starten</a></div>
- <div class="notice">Schwerpunkt: Eingriffsrecht (ER), Kriminalistik (K), Verkehrsrecht. Inhalte sind Lernhilfe auf Basis der Rechtsgrundlagen – Ausbildungsplan und aktuellen Gesetzestext bitte gegenprüfen.</div></div>
+ $("#main").innerHTML=`<section class="hero"><div class="card"><div class="tag" style="--c:var(--accent)">Zwischenprüfungen · Polizei Sachsen · LG 1.2 POL</div><div class="row" style="gap:16px;flex-wrap:nowrap"><svg class="lg big" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="gl2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#274b7a"/><stop offset="1" stop-color="#14284a"/></linearGradient></defs><path d="M32 3 56 11v21c0 14-10 24-24 29C18 56 8 46 8 32V11z" fill="url(#gl2)" stroke="#d4a82a" stroke-width="3" stroke-linejoin="round"/><path d="M32 12l3.2 8.4 8.8 3.6-8.8 3.6L32 36l-3.2-8.4L20 24l8.8-3.6z" fill="#d4a82a"/><path d="M15 40q8-3.6 17 .8v13q-9-4.4-17-1z" fill="#f6f3ec"/><path d="M49 40q-8-3.6-17 .8v13q9-4.4 17-1z" fill="#dfe6f0"/><path d="M32 41v13" stroke="#14284a" stroke-width="1.4"/></svg><h1><span style="color:var(--accent)">Lern</span>atlas</h1></div><div class="mot" style="margin:-4px 0 6px">Eingriffsrecht · Kriminalistik · Verkehrsrecht</div><p class="mot">${esc(MOT[new Date().getDate()%MOT.length])}</p><div class="row"><a class="btn" href="#/atlas">Lernatlas öffnen</a><a class="btn s" href="#/cards">Flashcards</a><a class="btn s" href="#/quiz">Quiz starten</a></div>
+ <div class="notice"><b>Grundlage:</b> § 10 SächsAPOPol nennt Eingriffsrecht, Kriminalistik und Verkehrsrecht als Ausbildungsfächer (Zwischenprüfung: § 12). Der Ausbildungsplan LG 1.2 POL der Hochschule ist nicht öffentlich – die Inhalte folgen den Rechtsgrundlagen (SächsPVDG, StPO, StGB, StVO, StVG). Vor der Prüfung bitte mit Gesetzestext und Lehrmaterial abgleichen.</div></div>
  <div class="card"><h3 style="margin-top:0">Dein Fortschritt</h3><div class="bar" aria-hidden="true"><i style="width:${pct(N)}%"></i></div><p style="margin:.4em 0"><b>${S.d.length}</b> von ${N.length} Nuggets gelernt · Level ${lvl()+1}: <b>${esc(LEVELS[Math.min(lvl(),LEVELS.length-1)])}</b></p><div class="bar" aria-hidden="true" title="XP bis zum nächsten Level"><i style="width:${xp}%"></i></div><small class="norm">${S.x} XP · nächstes Level in ${100-xp} XP</small>
  <div class="stats"><div class="st"><b>🔥 ${S.s}</b><span>Tage-Serie</span></div><div class="st"><b>${S.k.length}/${ALLC.length}</b><span>Karten gewusst</span></div><div class="st"><b>${S.w.length}</b><span>zu wiederholen</span></div></div>
  ${S.w.length?`<p><a class="btn r" href="#/wdh">${S.w.length} falsche Fragen wiederholen</a></p>`:`<p class="mot">${S.a?"Keine offenen Fehler – stark! 🎯":"Starte mit dem ersten Nugget."}</p>`}</div></section>
@@ -175,6 +176,9 @@ function vAtlas(id){const l=nuggets();let n=byId[id]||l[0]||N[0];
  <div class="row" style="margin-top:18px"><button class="btn ${done?"s":"g"}" id="done">${done?"✓ Gelernt (zurücknehmen)":"Als gelernt markieren"}</button><a class="btn" href="#/quiz/${n.id}">Quiz zu diesem Nugget</a><a class="btn s" href="#/cards/${n.id}">Karten</a></div>
  <div class="row" style="margin-top:14px;justify-content:space-between">${N[i-1]?`<a href="#/atlas/${N[i-1].id}">← ${esc(N[i-1].title)}</a>`:"<span></span>"}${N[i+1]?`<a href="#/atlas/${N[i+1].id}">${esc(N[i+1].title)} →</a>`:""}</div></article></div>`;
  $("#done").onclick=()=>{if(done)S.d=S.d.filter(x=>x!==n.id);else{S.d.push(n.id);addXp(15);toast(PRAISE[Math.floor(Math.random()*PRAISE.length)]);if(pct(N.filter(x=>x.f===n.f))===100){toast("🏆 Fach "+FACH[n.f].n+" komplett!");confetti()}}touch();save();paint();vAtlas(n.id)}}
+function vParas(){const m={};N.filter(n=>F.f.includes(n.f)).forEach(n=>n.norm.split(" · ").forEach(x=>{(m[x]=m[x]||[]).push(n)}));
+ const keys=Object.keys(m).sort((a,b)=>a.localeCompare(b,"de",{numeric:true}));
+ $("#main").innerHTML=`<div class="card"><h2 style="margin-top:0">Paragrafen-Index <small class="norm">${keys.length} Normfundstellen</small></h2><p class="mot">Alle Vorschriften aus den Lernnuggets – Klick führt zum Nugget.</p><div style="columns:2 320px;gap:24px">${keys.map(k=>`<div style="break-inside:avoid;margin:0 0 10px"><b class="norm" style="color:var(--ink)">${esc(k)}</b><br>${m[k].map(n=>`<a href="#/atlas/${n.id}" style="font-size:.85rem;margin-right:8px"><span class="dot d" style="--c:${FACH[n.f].c};display:inline-block;width:8px;height:8px;margin-right:3px"></span>${esc(n.title)}</a>`).join("")}</div>`).join("")}</div></div>`}
 // Flashcards
 let deck=[],di=0,flipped=false,ds={};
 function vCards(id){let cs=id&&byId[id]?byId[id].cards:ALLC.filter(c=>F.f.includes(c.f));deck=shuffle(cs);di=0;flipped=false;ds={k:0,n:0};drawCard()}
@@ -206,7 +210,7 @@ function vSearch(t){t=t.toLowerCase();const r=N.filter(n=>(n.title+" "+n.norm+" 
  $("#main").innerHTML=`<div class="card"><h2 style="margin-top:0">Suche: „${esc(t)}“ <small class="norm">${r.length} Treffer</small></h2>${r.map(n=>`<p><a href="#/atlas/${n.id}"><span class="tag" style="--c:${FACH[n.f].c}">${n.f}</span>${esc(n.title)}</a><br><small class="norm">${esc(n.norm)}</small></p>`).join("")||"Keine Treffer."}</div>`}
 // ---------- Router ----------
 function route(){const [,r,id]=location.hash.split("/");paint();window.scrollTo(0,0);
- if(r==="atlas")vAtlas(id);else if(r==="cards")vCards(id);else if(r==="quiz")vQuiz(id);else if(r==="wdh")vWdh();else vStart();
+ if(r==="atlas")vAtlas(id);else if(r==="cards")vCards(id);else if(r==="paras")vParas();else if(r==="quiz")vQuiz(id);else if(r==="wdh")vWdh();else vStart();
  document.querySelectorAll("[data-go]").forEach(e=>{e.onclick=()=>location.hash=e.dataset.go;e.onkeydown=k=>{if(k.key==="Enter")location.hash=e.dataset.go}})}
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{const t=e.target.tagName;if(e.key==="/"&&t!=="INPUT"){e.preventDefault();$("#q").focus()}
