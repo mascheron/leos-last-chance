@@ -118,6 +118,7 @@ footer a,footer button{color:var(--mute);background:none;border:0;padding:0;font
 
 <script>
 const DATA=/*DATA*/null;
+const POL=/*POL*/null;
 (function(){
 "use strict";
 const FACH={ER:{n:"Eingriffsrecht",c:"var(--er)",icon:"⚖️",d:"Befugnisse, Zwang, Grundrechte"},K:{n:"Kriminalistik",c:"var(--k)",icon:"🔎",d:"Tatort, Spuren, Vernehmung"},V:{n:"Verkehrsrecht",c:"var(--v)",icon:"🚔",d:"StVO, StVG, Verkehrsstraftaten"}};
@@ -125,6 +126,12 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const N=DATA;const byId={};N.forEach(n=>{byId[n.id]=n;n.cards=n.cards.map((c,i)=>({id:n.id+"c"+i,q:c[0],a:c[1],n:n.id,f:n.f}));n.quiz=n.quiz.map((q,i)=>Object.assign({id:n.id+"q"+i,n:n.id,f:n.f},q))});
 const ALLQ=N.flatMap(n=>n.quiz),ALLC=N.flatMap(n=>n.cards);
+const LAW={pvdg:{s:"SächsPVDG",p:"p",n:"Sächsisches Polizeivollzugsdienstgesetz"},pbg:{s:"SächsPBG",p:"b",n:"Sächsisches Polizeibehördengesetz"}};
+const PCARD={},PROWS=[];
+for(const k in LAW)POL[k].forEach(([nr,t,g,nid],i)=>{const n=byId[nid],id=LAW[k].p+nr,re=new RegExp("^§§? ?"+nr+"(?![0-9a-z])");
+ const hint=n&&k==="pvdg"?n.punkte.filter(x=>re.test(x)):[];
+ const c={id,q:LAW[k].s+" § "+nr+": Wie lautet die Überschrift – und was regelt die Vorschrift?",a:t+(hint.length?" — "+hint.join(" · "):""),n:nid,f:n?n.f:"ER",law:k,nr,t,g};PCARD[id]=c;PROWS.push(c)});
+ALLC.push(...PROWS);
 const LEVELS=["Anwärter","Streifenneuling","Polizeimeister-Anwärter","Polizeimeister","Obermeister","Hauptmeister","Kommissar-Anwärter","Kommissar","Leo – Legende"];
 const PRAISE=["Stark! 💪","Sauber gelöst!","Das sitzt!","Genau so! 🎯","Top – weiter so!","Prüfungsreif! ✅"];
 const NUDGE=["Nicht schlimm – Fehler sind Lernchancen. Die Frage kommt wieder.","Gleich nochmal – beim zweiten Mal sitzt es.","Merk dir die Begründung, dann klappt’s."];
@@ -133,8 +140,8 @@ const MOT=["Jeder Tag zählt – heute ein Nugget mehr als gestern.","Du musst n
 let S={d:[],w:[],k:[],x:0,s:0,l:"",t:"",a:0,r:0},consent=null,F={f:["ER","K","V"],st:"all"},mem=false;
 function ck(n){const m=document.cookie.split("; ").find(r=>r.startsWith(n+"="));return m?decodeURIComponent(m.slice(n.length+1)):null}
 function sck(n,v,days){try{document.cookie=n+"="+encodeURIComponent(v)+"; max-age="+days*86400+"; path=/; SameSite=Lax"+(location.protocol==="https:"?"; Secure":"")}catch(e){}}
-function save(){if(consent!=="1")return;try{sck("llc",btoa(unescape(encodeURIComponent(JSON.stringify(S)))),365)}catch(e){}}
-function load(){try{consent=ck("llc_c");const v=ck("llc");if(consent==="1"&&v){const o=JSON.parse(decodeURIComponent(escape(atob(v))));if(o&&typeof o==="object")S=Object.assign(S,o)}}catch(e){}
+function save(){if(consent!=="1")return;try{const r=Object.assign({},S);delete r.k;sck("llc",btoa(unescape(encodeURIComponent(JSON.stringify(r)))),365);sck("llk",S.k.join("."),365)}catch(e){}}
+function load(){try{consent=ck("llc_c");const v=ck("llc");if(consent==="1"&&v){const o=JSON.parse(decodeURIComponent(escape(atob(v))));if(o&&typeof o==="object")S=Object.assign(S,o)}const kk=ck("llk");if(consent==="1"&&kk)S.k=kk.split(".").filter(Boolean)}catch(e){}
  S.d=S.d.filter(i=>byId[i]);S.w=S.w.filter(i=>ALLQ.some(q=>q.id===i));S.k=S.k.filter(i=>ALLC.some(c=>c.id===i))}
 const today=()=>new Date().toISOString().slice(0,10);
 function touch(){const t=today();if(S.l===t)return;const y=new Date(Date.now()-864e5).toISOString().slice(0,10);S.s=(S.l===y)?S.s+1:1;S.l=t;if(S.s>1)toast("🔥 "+S.s+" Tage in Folge – weiter so!");save()}
@@ -151,7 +158,7 @@ function chips(){$("#chips").innerHTML=["ER","K","V"].map(k=>`<button class="chi
 document.addEventListener("click",e=>{const b=e.target.closest("[data-f],[data-s]");if(!b)return;
  if(b.dataset.f==="all")F.f=["ER","K","V"];else if(b.dataset.f){const k=b.dataset.f;if(F.f.length===3)F.f=[k];else if(F.f.includes(k)){F.f=F.f.filter(x=>x!==k);if(!F.f.length)F.f=["ER","K","V"]}else F.f.push(k)}
  if(b.dataset.s)F.st=b.dataset.s;chips();route()});
-function nav(){const r=(location.hash.split("/")[1]||"");$("#nav").innerHTML=[["","Start"],["atlas","Lernatlas"],["cards","Flashcards"],["paras","Paragrafen"],["quiz","Quiz"],["wdh","Wiederholen"+(S.w.length?" ("+S.w.length+")":"")]].map(([h,l])=>`<a href="#/${h}" ${r===h?'aria-current="page"':""}>${l}</a>`).join("")}
+function nav(){const r=(location.hash.split("/")[1]||"");$("#nav").innerHTML=[["","Start"],["atlas","Lernatlas"],["polizeirecht","Polizeirecht"],["cards","Flashcards"],["paras","Norm-Index"],["quiz","Quiz"],["wdh","Wiederholen"+(S.w.length?" ("+S.w.length+")":"")]].map(([h,l])=>`<a href="#/${h}" ${r===h?'aria-current="page"':""}>${l}</a>`).join("")}
 function paint(){const all=N,p=pct(all);$("#ringc").style.strokeDashoffset=107-107*p/100;$("#ringt").textContent=p+"%";nav()}
 // ---------- Views ----------
 function heat(list){return `<div class="heat">`+list.map((n,i)=>`<a href="#/atlas/${n.id}" class="${S.d.includes(n.id)?"d":""}" style="--c:${FACH[n.f].c}" title="${esc(n.title)}">${i+1}</a>`).join("")+`</div>`}
@@ -171,7 +178,7 @@ function vAtlas(id){const l=nuggets();let n=byId[id]||l[0]||N[0];
  const c=FACH[n.f].c,done=S.d.includes(n.id),i=N.indexOf(n);
  const rel=N.filter(x=>x.f===n.f&&x.id!==n.id).slice(0,3);
  $("#main").innerHTML=`<div class="layout"><aside class="tree" aria-label="Themenbaum">${tree}</aside><article class="card" style="--c:${c}"><span class="tag">${FACH[n.f].n}</span><span class="tag" style="background:var(--mute)">${esc(n.t)}</span><h2 style="font-size:1.8rem;margin:.3em 0">${esc(n.title)}</h2><div class="norm">${esc(n.norm)}</div>
- <h3>Kurzfassung</h3><p>${esc(n.kurz)}</p><h3>Das musst du wissen</h3><ul class="kp">${n.punkte.map(p=>`<li>${esc(p)}</li>`).join("")}</ul><div class="merke">💡 <b>Merke:</b> ${esc(n.merke)}</div>
+ <h3>Kurzfassung</h3><p>${esc(n.kurz)}</p><h3>Das musst du wissen</h3><ul class="kp">${n.punkte.map(p=>`<li>${esc(p)}</li>`).join("")}</ul><div class="merke">💡 <b>Merke:</b> ${esc(n.merke)}</div>${PROWS.some(c=>c.n===n.id)?`<h3>Paragrafen-Lernkarten</h3><div class="row" style="gap:6px">${PROWS.filter(c=>c.n===n.id).map(c=>`<a class="chip" style="--c:var(--accent);text-decoration:none" href="#/cards/${c.id}" title="${esc(c.t)}">${LAW[c.law].s} § ${esc(c.nr)}</a>`).join("")}</div>`:""}
  <h3>Prüfungsfragen</h3>${n.cards.map(x=>`<details style="margin:6px 0"><summary><b>${esc(x.q)}</b></summary><p style="margin:.4em 0 .8em">${esc(x.a)}</p></details>`).join("")}
  <div class="row" style="margin-top:18px"><button class="btn ${done?"s":"g"}" id="done">${done?"✓ Gelernt (zurücknehmen)":"Als gelernt markieren"}</button><a class="btn" href="#/quiz/${n.id}">Quiz zu diesem Nugget</a><a class="btn s" href="#/cards/${n.id}">Karten</a></div>
  <div class="row" style="margin-top:14px;justify-content:space-between">${N[i-1]?`<a href="#/atlas/${N[i-1].id}">← ${esc(N[i-1].title)}</a>`:"<span></span>"}${N[i+1]?`<a href="#/atlas/${N[i+1].id}">${esc(N[i+1].title)} →</a>`:""}</div></article></div>`;
@@ -179,9 +186,22 @@ function vAtlas(id){const l=nuggets();let n=byId[id]||l[0]||N[0];
 function vParas(){const m={};N.filter(n=>F.f.includes(n.f)).forEach(n=>n.norm.split(" · ").forEach(x=>{(m[x]=m[x]||[]).push(n)}));
  const keys=Object.keys(m).sort((a,b)=>a.localeCompare(b,"de",{numeric:true}));
  $("#main").innerHTML=`<div class="card"><h2 style="margin-top:0">Paragrafen-Index <small class="norm">${keys.length} Normfundstellen</small></h2><p class="mot">Alle Vorschriften aus den Lernnuggets – Klick führt zum Nugget.</p><div style="columns:2 320px;gap:24px">${keys.map(k=>`<div style="break-inside:avoid;margin:0 0 10px"><b class="norm" style="color:var(--ink)">${esc(k)}</b><br>${m[k].map(n=>`<a href="#/atlas/${n.id}" style="font-size:.85rem;margin-right:8px"><span class="dot d" style="--c:${FACH[n.f].c};display:inline-block;width:8px;height:8px;margin-right:3px"></span>${esc(n.title)}</a>`).join("")}</div>`).join("")}</div></div>`}
+function vPol(k){k=LAW[k]?k:"pvdg";const rows=PROWS.filter(c=>c.law===k),gs=[...new Set(rows.map(c=>c.g))];
+ const known=rows.filter(c=>S.k.includes(c.id)).length;
+ $("#main").innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">Sächsisches Polizeirecht – Paragrafen-Übersicht</h2><div class="norm">Gliederung laut REVOSax, Stand 01.07.2026 · Klick auf § = Lernkarten</div></div><div class="row"><a class="btn ${k==="pvdg"?"":"s"}" href="#/polizeirecht/pvdg">SächsPVDG</a><a class="btn ${k==="pbg"?"":"s"}" href="#/polizeirecht/pbg">SächsPBG</a></div></div>
+ <p style="margin:.6em 0 0"><b>${LAW[k].n}</b> – ${rows.length} Paragrafen · ${known} Karten gewusst</p><div class="bar" style="margin:6px 0 12px"><i style="width:${rows.length?known/rows.length*100:0}%"></i></div>
+ <div class="row"><input id="pf" class="ib" style="flex:1;min-width:200px;padding:9px 12px" placeholder="Paragraf oder Stichwort filtern (z. B. 22, Gewahrsam)" aria-label="Paragrafen filtern"><a class="btn" href="#/cards/g${k}-all">Alle ${rows.length} Paragrafen-Karten üben</a></div></div>
+ <div id="plist">${gs.map((g,gi)=>{const r=rows.filter(c=>c.g===g),core=/^Teil [12]|^Abschnitt [123]/.test(g),kn=r.filter(c=>S.k.includes(c.id)).length;
+ return `<section class="card pg" style="margin-top:14px;--c:${core?"var(--er)":"var(--mute)"}"><div class="row" style="justify-content:space-between"><h3 style="margin:0">${esc(g)} <span class="tag" style="background:${core?"var(--er)":"var(--mute)"}">${core?"Prüfungskern":"Vertiefung"}</span></h3><span class="row"><small class="norm">${kn}/${r.length}</small><a class="btn s" style="padding:5px 12px" href="#/cards/g${k}-${gi}">Gruppe üben</a></span></div>
+ <div style="margin-top:8px">${r.map(c=>`<div class="prow" data-s="${esc((c.nr+" "+c.t).toLowerCase())}" style="display:flex;gap:10px;align-items:baseline;padding:5px 0;border-top:1px solid var(--line)"><a class="chip" style="--c:var(--accent);white-space:nowrap;text-decoration:none;${S.k.includes(c.id)?"background:var(--ok);color:#fff;border-color:var(--ok)":""}" href="#/cards/${c.id}" title="Lernkarte zu § ${esc(c.nr)}">§ ${esc(c.nr)}</a><span style="flex:1">${esc(c.t)}</span>${byId[c.n]?`<a href="#/atlas/${c.n}" style="font-size:.8rem;white-space:nowrap" title="${esc(byId[c.n].title)}">📖 Nugget</a>`:""}</div>`).join("")}</div></section>`}).join("")}</div>`;
+ $("#pf").oninput=e=>{const v=e.target.value.trim().toLowerCase().replace(/^§\s*/,"");document.querySelectorAll(".prow").forEach(x=>{const s=x.dataset.s;x.style.display=!v||s.includes(v)||s.split(" ")[0]===v?"":"none"});document.querySelectorAll(".pg").forEach(sec=>{sec.style.display=[...sec.querySelectorAll(".prow")].some(x=>x.style.display!=="none")?"":"none"})}}
 // Flashcards
 let deck=[],di=0,flipped=false,ds={};
-function vCards(id){let cs=id&&byId[id]?byId[id].cards:ALLC.filter(c=>F.f.includes(c.f));deck=shuffle(cs);di=0;flipped=false;ds={k:0,n:0};drawCard()}
+function vCards(id){let cs,keep=false,m;
+ if(id&&PCARD[id]){const c=PCARD[id];cs=[c].concat(byId[c.n]?byId[c.n].cards:[]);keep=true}
+ else if(id&&(m=/^g(pvdg|pbg)-(\d+|all)$/.exec(id))){const gs=[...new Set(POL[m[1]].map(r=>r[2]))];cs=PROWS.filter(c=>c.law===m[1]&&(m[2]==="all"||c.g===gs[+m[2]]))}
+ else cs=id&&byId[id]?byId[id].cards:ALLC.filter(c=>F.f.includes(c.f));
+ deck=keep?cs:shuffle(cs);di=0;flipped=false;ds={k:0,n:0};drawCard()}
 function drawCard(){const c=deck[di];
  if(!c){$("#main").innerHTML=`<div class="card" style="text-align:center"><h2>Stapel geschafft! 🎉</h2><p>${ds.k} gewusst · ${ds.n} nochmal.</p><a class="btn" href="#/cards">Neuer Stapel</a> <a class="btn s" href="#/quiz">Quiz</a></div>`;if(ds.k+ds.n>3)confetti();return}
  const col=FACH[c.f].c;
@@ -207,10 +227,11 @@ function drawQ(){if(Q.i>=Q.list.length){const t=Q.ok+Q.bad;const pc=t?Math.round
    $("#fb").innerHTML=`<div class="fb"><b>${NUDGE[Math.floor(Math.random()*NUDGE.length)]}</b><br>${esc(q.e)}<br><small>Diese Frage kommt noch einmal.</small></div><button class="btn" id="nx" autofocus>Weiter</button>`;Q.list.splice(Q.i,1);Q.list.push(q)}
   touch();save();paint();$("#nx").onclick=drawQ})}
 function vSearch(t){t=t.toLowerCase();const r=N.filter(n=>(n.title+" "+n.norm+" "+n.kurz+" "+n.punkte.join(" ")+" "+n.cards.map(c=>c.q+c.a).join(" ")).toLowerCase().includes(t));
- $("#main").innerHTML=`<div class="card"><h2 style="margin-top:0">Suche: „${esc(t)}“ <small class="norm">${r.length} Treffer</small></h2>${r.map(n=>`<p><a href="#/atlas/${n.id}"><span class="tag" style="--c:${FACH[n.f].c}">${n.f}</span>${esc(n.title)}</a><br><small class="norm">${esc(n.norm)}</small></p>`).join("")||"Keine Treffer."}</div>`}
+ const pr=PROWS.filter(c=>(LAW[c.law].s+" § "+c.nr+" "+c.t).toLowerCase().includes(t)).slice(0,30);
+ $("#main").innerHTML=`<div class="card"><h2 style="margin-top:0">Suche: „${esc(t)}“ <small class="norm">${r.length} Nuggets · ${pr.length} Paragrafen</small></h2>${pr.map(c=>`<p style="margin:.2em 0"><a class="chip" style="--c:var(--accent);text-decoration:none" href="#/cards/${c.id}">${LAW[c.law].s} § ${esc(c.nr)}</a> ${esc(c.t)}</p>`).join("")}${r.map(n=>`<p><a href="#/atlas/${n.id}"><span class="tag" style="--c:${FACH[n.f].c}">${n.f}</span>${esc(n.title)}</a><br><small class="norm">${esc(n.norm)}</small></p>`).join("")||"Keine Treffer."}</div>`}
 // ---------- Router ----------
 function route(){const [,r,id]=location.hash.split("/");paint();window.scrollTo(0,0);
- if(r==="atlas")vAtlas(id);else if(r==="cards")vCards(id);else if(r==="paras")vParas();else if(r==="quiz")vQuiz(id);else if(r==="wdh")vWdh();else vStart();
+ if(r==="atlas")vAtlas(id);else if(r==="cards")vCards(id);else if(r==="polizeirecht")vPol(id);else if(r==="paras")vParas();else if(r==="quiz")vQuiz(id);else if(r==="wdh")vWdh();else vStart();
  document.querySelectorAll("[data-go]").forEach(e=>{e.onclick=()=>location.hash=e.dataset.go;e.onkeydown=k=>{if(k.key==="Enter")location.hash=e.dataset.go}})}
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{const t=e.target.tagName;if(e.key==="/"&&t!=="INPUT"){e.preventDefault();$("#q").focus()}
@@ -218,12 +239,12 @@ document.addEventListener("keydown",e=>{const t=e.target.tagName;if(e.key==="/"&
 $("#q").addEventListener("input",e=>{const v=e.target.value.trim();if(v.length>1)vSearch(v);else route()});
 $("#theme").onclick=()=>{S.t=S.t==="dark"?"light":"dark";document.documentElement.dataset.theme=S.t;save()};
 // consent & legal
-function cons(v){consent=v;sck("llc_c",v,365);$("#consent").hidden=true;if(v==="1"){save();toast("Fortschritt wird in einem Cookie gespeichert.")}else{sck("llc","",0);toast("Nur für diese Sitzung – nichts wird gespeichert.")}}
+function cons(v){consent=v;sck("llc_c",v,365);$("#consent").hidden=true;if(v==="1"){save();toast("Fortschritt wird in einem Cookie gespeichert.")}else{sck("llc","",0);sck("llk","",0);toast("Nur für diese Sitzung – nichts wird gespeichert.")}}
 $("#cyes").onclick=()=>cons("1");$("#cno").onclick=()=>cons("0");
 $("#cks").onclick=()=>{$("#consent").hidden=false};
 function dlg(h){$("#dlgc").innerHTML=h;$("#dlg").showModal()}
 $("#imp").onclick=()=>dlg(`<h3>Impressum</h3><p><b>crosspublish media GmbH</b><br>Leipziger Str. 27<br>09648 Mittweida, Deutschland</p><p>Handelsregister: Amtsgericht Chemnitz, HRA 31759<br>USt-IdNr.: DE318536831<br>Geschäftsführer: Michael Ascheron<br>Tel.: +49 (0) 3727 9760 · E-Mail: info@crosspublish.de</p><p>Vollständiges Impressum: <a href="https://mascheron.de/impressum" target="_blank" rel="noopener">mascheron.de/impressum</a></p>`);
-$("#dsh").onclick=()=>dlg(`<h3>Datenschutz</h3><p><b>Verantwortlicher:</b> crosspublish media GmbH, Leipziger Str. 27, 09648 Mittweida, info@crosspublish.de.</p><p><b>Cookies:</b> Mit deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 TDDDG) setzt diese Seite zwei Cookies: <code>llc_c</code> (deine Auswahl) und <code>llc</code> (Lernfortschritt: gelernte Nuggets, falsch beantwortete Fragen, XP, Serie, Design). Laufzeit 1 Jahr, nur in deinem Browser, keine Weitergabe, kein Tracking. Widerruf jederzeit über „Cookie-Einstellungen“ → „Nur diese Sitzung“ (löscht den Fortschritts-Cookie).</p><p><b>Hosting:</b> Netlify (Server-Logfiles, z. B. IP-Adresse, technisch erforderlich).</p><p>Vollständige Datenschutzerklärung: <a href="https://mascheron.de/datenschutz" target="_blank" rel="noopener">mascheron.de/datenschutz</a></p>`);
+$("#dsh").onclick=()=>dlg(`<h3>Datenschutz</h3><p><b>Verantwortlicher:</b> crosspublish media GmbH, Leipziger Str. 27, 09648 Mittweida, info@crosspublish.de.</p><p><b>Cookies:</b> Mit deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 TDDDG) setzt diese Seite drei Cookies: <code>llc_c</code> (deine Auswahl) sowie <code>llc</code> und <code>llk</code> (Lernfortschritt: gelernte Nuggets, falsch beantwortete Fragen, XP, Serie, Design). Laufzeit 1 Jahr, nur in deinem Browser, keine Weitergabe, kein Tracking. Widerruf jederzeit über „Cookie-Einstellungen“ → „Nur diese Sitzung“ (löscht den Fortschritts-Cookie).</p><p><b>Hosting:</b> Netlify (Server-Logfiles, z. B. IP-Adresse, technisch erforderlich).</p><p>Vollständige Datenschutzerklärung: <a href="https://mascheron.de/datenschutz" target="_blank" rel="noopener">mascheron.de/datenschutz</a></p>`);
 load();document.documentElement.dataset.theme=S.t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
 if(consent===null)$("#consent").hidden=false;
 chips();touch();route();
