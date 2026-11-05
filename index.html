@@ -2,14 +2,16 @@
 <html lang="de" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eef2f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1424" media="(prefers-color-scheme: dark)">
 <title>Lernatlas – Zwischenprüfungen Polizei Sachsen</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23274b7a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2314284a%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath%20d%3D%22M32%203%2056%2011v21c0%2014-10%2024-24%2029C18%2056%208%2046%208%2032V11z%22%20fill%3D%22url%28%23g%29%22%20stroke%3D%22%23d4a82a%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M32%2012l3.2%208.4%208.8%203.6-8.8%203.6L32%2036l-3.2-8.4L20%2024l8.8-3.6z%22%20fill%3D%22%23d4a82a%22/%3E%3Cpath%20d%3D%22M15%2040q8-3.6%2017%20.8v13q-9-4.4-17-1z%22%20fill%3D%22%23f6f3ec%22/%3E%3Cpath%20d%3D%22M49%2040q-8-3.6-17%20.8v13q9-4.4%2017-1z%22%20fill%3D%22%23dfe6f0%22/%3E%3Cpath%20d%3D%22M32%2041v13%22%20stroke%3D%22%2314284a%22%20stroke-width%3D%221.4%22/%3E%3C/svg%3E">
 <meta name="description" content="Lernatlas: interaktiv mit Flashcards und Quiz für Eingriffsrecht, Kriminalistik und Verkehrsrecht (Zwischenprüfungen Polizei Sachsen).">
 <meta name="robots" content="noindex">
 <style>
-:root{--bg:#f6f3ec;--card:#fffdf8;--ink:#1f2430;--mute:#6b7280;--line:#e4ded0;--accent:#1d4e89;--ok:#2f7d4f;--bad:#b3362f;--er:#b3362f;--k:#6a4c93;--v:#1d7a8c;--sh:0 8px 28px rgba(31,36,48,.08)}
-[data-theme=dark]{--bg:#12151c;--card:#1a1f29;--ink:#eceff4;--mute:#9aa3b2;--line:#2b3240;--accent:#7fb0ee;--ok:#5fc08a;--bad:#ef8a83;--er:#ef8a83;--k:#b79cf0;--v:#63c6d8;--sh:0 8px 28px rgba(0,0,0,.4)}
+:root{--bg:#eef2f8;--card:#ffffff;--ink:#14213d;--mute:#46536b;--line:#d9e0ec;--accent:#1d3a6e;--ok:#1f8a4c;--bad:#c0392b;--er:#b3362f;--k:#6a4c93;--v:#1d7a8c;--sh:0 1px 2px rgba(20,33,61,.06),0 6px 20px rgba(20,33,61,.06)}
+[data-theme=dark]{--bg:#0e1424;--card:#161e33;--ink:#e8edf8;--mute:#a8b4cc;--line:#2a3555;--accent:#7aa7f5;--ok:#5fd08d;--bad:#f08a7e;--er:#ef8a83;--k:#b79cf0;--v:#63c6d8;--sh:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.3)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
 h1,h2,h3,.serif{font-family:"Fraunces","Source Serif 4",Georgia,serif;font-weight:600;letter-spacing:-.01em}
@@ -57,7 +59,7 @@ footer{padding-bottom:70px}
 main{max-width:1280px;margin:auto;padding:16px}
 .layout{display:grid;grid-template-columns:320px 1fr;gap:24px}
 @media(max-width:860px){.layout{grid-template-columns:1fr}}
-.tree{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;max-height:calc(100vh - 170px);overflow:auto;position:sticky;top:130px;align-self:start}
+.tree{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;overflow:auto;position:sticky;align-self:start}
 @media(max-width:860px){.tree{position:static;max-height:none}}
 .tree h4{margin:12px 6px 4px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--c)}
 .tree a{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:.92rem}
@@ -112,9 +114,97 @@ footer a,footer button{color:var(--mute);background:none;border:0;padding:0;font
 @keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.8}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media print{header,.filters,.tree,footer,#consent,.btn,.row{display:none!important}.layout{display:block}.card{box-shadow:none;border:0}}
+/* ===== Design-Angleichung an den Lernatlas (Lernpfad) ===== */
+:root{--accent-ink:#fff;--soft:#e4edfb;--merkbg:#dff3e7;--hh:130px;--fxc:var(--ok);--fxshine:rgba(255,255,255,.6);--fxmark:rgba(255,205,60,.55)}
+[data-theme=dark]{--accent-ink:#0e1424;--soft:#1f2c4d;--merkbg:#143626;--fxshine:rgba(255,255,255,.12);--fxmark:rgba(255,205,60,.28)}
+html{-webkit-text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+button,a,.chip,.opt{touch-action:manipulation}
+header{background:color-mix(in srgb,var(--card) 94%,transparent);box-shadow:var(--sh);transition:transform .3s ease,margin-bottom .3s ease}
+header.hid{transform:translateY(-100%);box-shadow:none}
+nav a{transition:background-color .2s,color .2s;font-weight:600}
+nav a[aria-current=page],nav a:hover{color:var(--accent-ink)}
+.btn{color:var(--accent-ink);border-radius:10px;transition:transform .15s,box-shadow .2s,filter .2s}
+.btn.s{color:var(--ink)}
+.btn:hover{filter:brightness(1.08);box-shadow:0 4px 14px rgba(20,33,61,.18)}
+.btn.g,.btn.r{color:var(--accent-ink)}
+.chip[aria-pressed=true],.tag{color:var(--accent-ink)}
+.heat a.d{color:var(--accent-ink)}
+.card{border-radius:14px}
+.tree{top:calc(var(--hh) + 12px);max-height:calc(100vh - var(--hh) - 40px);transition:top .3s ease,max-height .3s ease}
+.merke{border-left:5px solid var(--ok);background:var(--merkbg);border-radius:8px;font-weight:600}
+.merke b{text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;color:var(--ok)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+#ringc{transition:stroke-dashoffset .9s ease}
+#sprog{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--ok));z-index:80;pointer-events:none}
+html.tt *,html.tt *::before{transition:background-color .4s,color .4s,border-color .4s!important}
+.rvl{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.rvl.in{opacity:1;transform:none}
+main.pg{animation:fxfade .3s ease both}
+@keyframes fxfade{from{opacity:0}to{opacity:1}}
+/* ===== Animationen ===== */
+@keyframes fxwiggle{0%,100%{rotate:0deg}20%{rotate:-1.6deg}40%{rotate:1.2deg}60%{rotate:-.8deg}80%{rotate:.4deg}}
+@keyframes fxpop{0%{transform:scale(1)}35%{transform:scale(1.045)}100%{transform:scale(1)}}
+@keyframes fxshake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
+@keyframes fxrise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fxtile{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+@keyframes fxglow{0%{box-shadow:0 0 0 0 var(--fxc)}100%{box-shadow:0 0 0 16px transparent}}
+@keyframes fxsweep{0%,55%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+@keyframes fxpulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--fxc) 40%,transparent)}50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--fxc) 0%,transparent)}}
+@keyframes fxmark{to{background-size:100% 100%}}
+@keyframes fxbadge{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(-4deg)}}
+@keyframes fxshimmer{from{background-position:200% 0}to{background-position:-200% 0}}
+@media (hover:hover){
+ .fach:hover,.heat a:hover,.chip:hover,.st:hover,.opt:not(:disabled):hover,.tree a:hover{animation:fxwiggle .55s ease-in-out}
+ .fach:hover{box-shadow:0 10px 28px rgba(20,33,61,.18)}
+}
+.btn:active,.chip:active,.opt:active,.fach:active,.heat a:active{transform:scale(.97)}
+.heat a{animation:fxtile .45s ease both;animation-delay:calc(var(--i,0)*14ms);transition:background-color .2s,box-shadow .2s}
+.heat a:not(.d):nth-child(9n+4){animation:fxtile .45s ease both,fxwiggle 3.4s ease-in-out 2s infinite}
+.heat a:hover{box-shadow:0 4px 12px rgba(20,33,61,.2)}
+.opt.ok{animation:fxpop .45s ease,fxglow .8s ease-out}
+.opt.bad{animation:fxshake .42s ease}
+.fb{animation:fxrise .38s ease both}
+.flip{animation:fxrise .4s ease both}
+details[open]>*:not(summary){animation:fxrise .35s ease both}
+.merke,.notice{position:relative;overflow:hidden;animation:fxpulse 2.4s ease-in-out 2}
+.merke::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,var(--fxshine) 50%,transparent 62%);transform:translateX(-130%);animation:fxsweep 3s ease-in-out .5s 2;pointer-events:none}
+.merke>b:first-child{width:max-content;animation:fxbadge 2.4s ease-in-out 2;transform-origin:left center}
+.merke strong{background:linear-gradient(transparent 60%,var(--fxmark) 0) no-repeat;background-size:0 100%;animation:fxmark .9s ease .3s forwards}
+.merke:not(.fxon),.merke:not(.fxon)::after,.merke:not(.fxon)>b:first-child,.merke:not(.fxon) strong,.notice:not(.fxon){animation-play-state:paused}
+.bar i{background-size:200% 100%;background-image:linear-gradient(90deg,var(--accent),var(--ok),var(--accent));animation:fxshimmer 6s linear infinite}
+/* ===== Mobile ===== */
+#bnav{display:none}
+@media(max-width:720px){
+ body{padding-bottom:env(safe-area-inset-bottom)}
+ #bnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:40;background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom))}
+ #bnav a{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;border-radius:12px;text-decoration:none;color:var(--mute);font-size:.7rem;font-weight:600;transition:background-color .2s,color .2s}
+ #bnav a span{font-size:1.25rem;line-height:1.2;transition:transform .2s}
+ #bnav a[aria-current=page]{color:var(--accent);background:var(--soft)}
+ #bnav a[aria-current=page] span{transform:translateY(-2px) scale(1.15)}
+ #bnav em{position:absolute;top:2px;right:calc(50% - 22px);min-width:16px;height:16px;border-radius:99px;background:var(--bad);color:var(--accent-ink);font:700 .62rem/16px Inter,sans-serif;font-style:normal;text-align:center;padding:0 4px}
+ footer{padding-bottom:96px}
+ #consent{bottom:calc(68px + env(safe-area-inset-bottom))}
+ .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+ .flip{height:min(62dvh,340px)}
+ .btn,.chip,.opt{min-height:44px}
+ .swh{display:block}
+ header{padding-top:env(safe-area-inset-top)}
+}
+.swh{display:none;text-align:center;font-size:.8rem;color:var(--mute);margin:.6em 0 0}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}.merke strong{background-size:100% 100%}.rvl{opacity:1;transform:none}}
+@media print{*,*::before,*::after{animation:none!important}.rvl{opacity:1!important;transform:none!important}#bnav,#sprog{display:none!important}}
+/* Merksatz-Varianten (Animation: 2 Durchläufe, startet beim Sichtbarwerden) */
+.merke>b:first-child{display:block;margin-bottom:2px}
+.merke.bad{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card));--fxc:var(--bad)}
+.merke.bad>b:first-child{color:var(--bad)}
+.merke a{font-weight:600}
+.prow,.nrow{flex-wrap:wrap}
+.prow>*,.nrow>*{min-width:0;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
+<div id="sprog" aria-hidden="true"></div>
 <a class="skip" href="#main">Zum Inhalt</a>
 <header>
  <div class="hb">
@@ -139,6 +229,7 @@ footer a,footer button{color:var(--mute);background:none;border:0;padding:0;font
  <div class="row"><button class="btn" id="cyes">Erlauben</button><button class="btn s" id="cno">Nur diese Sitzung</button></div>
 </div>
 <dialog id="dlg"><div id="dlgc"></div><form method="dialog" style="margin-top:12px"><button class="btn s">Schließen</button></form></dialog>
+<nav id="bnav" aria-label="Schnellnavigation"></nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -189,7 +280,36 @@ function touch(){const t=today();if(S.l===t)return;const y=new Date(Date.now()-8
 function addXp(n){const old=lvl();S.x+=n;if(lvl()>old){toast("🎉 Level-Up: "+LEVELS[Math.min(lvl(),LEVELS.length-1)]);confetti()}save();paint()}
 const lvl=()=>Math.floor(S.x/100);
 let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2600)}
-function confetti(){const c=document.createElement("div");c.className="confetti";c.setAttribute("aria-hidden","true");const cols=["#b3362f","#6a4c93","#1d7a8c","#e0a526","#2f7d4f"];for(let i=0;i<60;i++){const e=document.createElement("i");e.style.left=Math.random()*100+"vw";e.style.background=cols[i%5];e.style.animationDelay=Math.random()*.6+"s";c.appendChild(e)}document.body.appendChild(c);setTimeout(()=>c.remove(),2800)}
+function confetti(){fxburst(document.body,90)}
+function confettiOld(){const c=document.createElement("div");c.className="confetti";c.setAttribute("aria-hidden","true");const cols=["#b3362f","#6a4c93","#1d7a8c","#e0a526","#2f7d4f"];for(let i=0;i<60;i++){const e=document.createElement("i");e.style.left=Math.random()*100+"vw";e.style.background=cols[i%5];e.style.animationDelay=Math.random()*.6+"s";c.appendChild(e)}document.body.appendChild(c);setTimeout(()=>c.remove(),2800)}
+// ---------- Effekte ----------
+const RMq=window.matchMedia("(prefers-reduced-motion:reduce)");
+const buzz=p=>{try{if(!RMq.matches&&navigator.vibrate)navigator.vibrate(p)}catch(e){}};
+const FXCOL=["#2f9e5f","#f0b04a","#7aa7f5","#e4572e","#a855f7","#14b8a6","#f472b6"];
+function fxp(x,y,dx,dy,rot,dur){const p=document.createElement("i"),s=5+Math.random()*7;
+ p.style.cssText="position:fixed;left:"+x+"px;top:"+y+"px;width:"+s+"px;height:"+(s*(Math.random()<.5?1:.45))+"px;background:"+FXCOL[Math.random()*FXCOL.length|0]+";border-radius:"+(Math.random()<.4?"50%":"2px")+";pointer-events:none;z-index:9999";
+ document.body.appendChild(p);
+ const a=p.animate([{transform:"translate(0,0) rotate(0)",opacity:1},{transform:"translate("+dx*.6+"px,"+(dy*.6-60)+"px) rotate("+rot*.5+"deg)",opacity:1,offset:.45},{transform:"translate("+dx+"px,"+(dy+140)+"px) rotate("+rot+"deg)",opacity:0}],{duration:dur,easing:"cubic-bezier(.2,.7,.4,1)"});
+ a.onfinish=()=>p.remove()}
+function fxburst(el,n){if(RMq.matches||!el||!el.getBoundingClientRect||!document.body.animate)return;n=n||26;const r=el.getBoundingClientRect();
+ if(n>=60){for(let i=0;i<n;i++)fxp(Math.random()*innerWidth,-12,(Math.random()-.5)*160,innerHeight*(.55+Math.random()*.35),Math.random()*720-360,1500+Math.random()*1300);return}
+ if(!r.width&&!r.height)return;const cx=r.left+r.width/2,cy=r.top+r.height/2;
+ for(let j=0;j<n;j++){const ang=Math.random()*Math.PI*2,d=50+Math.random()*110;fxp(cx,cy,Math.cos(ang)*d,Math.sin(ang)*d,Math.random()*540-270,800+Math.random()*700)}}
+const fxIO=("IntersectionObserver" in window)?new IntersectionObserver(es=>{let k=0;es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;fxIO.unobserve(el);el.style.transitionDelay=(k++*55)+"ms";el.classList.add("in");setTimeout(()=>{el.classList.remove("rvl","in");el.style.transitionDelay=""},900)})},{rootMargin:"0px 0px -5% 0px",threshold:.04}):null;
+function countUp(el){const m=/^(\D*)(\d+)(.*)$/.exec(el.textContent);if(!m||+m[2]<1)return;const n=+m[2],pre=m[1],suf=m[3],d=Math.min(900,300+n*25);let t0=null;
+ const f=ts=>{if(t0===null)t0=ts;const p=Math.min(1,(ts-t0)/d);el.textContent=pre+Math.round(n*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(f)};el.textContent=pre+"0"+suf;requestAnimationFrame(f)}
+function pgIn(){const mn=$("#main");if(RMq.matches)return;mn.classList.remove("pg");void mn.offsetWidth;mn.classList.add("pg");
+ mn.querySelectorAll(".heat a").forEach((a,i)=>a.style.setProperty("--i",Math.min(i,45)));
+ if(fxIO)mn.querySelectorAll(".card,.fach,.stats .st,.merke,.notice,h2").forEach(el=>{if(el.closest(".rvl"))return;el.classList.add("rvl");fxIO.observe(el)});
+ mn.querySelectorAll(".st b").forEach(countUp)}
+const sprog=$("#sprog");let progT=0;
+const updProg=()=>{const h=document.documentElement.scrollHeight-innerHeight;sprog.style.transform="scaleX("+(h>0?Math.min(1,scrollY/h):0)+")"};
+addEventListener("scroll",()=>{if(progT)return;progT=requestAnimationFrame(()=>{progT=0;updProg()})},{passive:true});
+function bnav(){const r=(location.hash.split("/")[1]||"");$("#bnav").innerHTML=[["","🏠","Start"],["atlas","📚","Atlas"],["cards","🃏","Karten"],["quiz","❓","Quiz"],["wdh","🔁","Wdh."]].map(([h,i,l])=>`<a href="#/${h}" ${r===h?'aria-current="page"':""}><span aria-hidden="true">${i}</span>${l}${h==="wdh"&&S.w.length?`<em>${S.w.length}</em>`:""}</a>`).join("")}
+// Merksatz-/Hinweis-Animation startet erst, wenn die Box sichtbar wird (2 Durchläufe per CSS)
+const mkIO=("IntersectionObserver" in window)?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("fxon");mkIO.unobserve(e.target)}}),{threshold:.35}):null;
+function mkScan(){const r=document.getElementById("main");r.querySelectorAll(".merke:not(.fxon),.notice:not(.fxon)").forEach(x=>{if(!mkIO){x.classList.add("fxon");return}if(!x.__w){x.__w=1;mkIO.observe(x)}})}
+new MutationObserver(mkScan).observe(document.getElementById("main"),{childList:true,subtree:true});
 // ---------- Filter helpers ----------
 const nuggets=()=>N.filter(n=>F.f.includes(n.f)&&(F.st==="all"||(F.st==="done"&&S.d.includes(n.id))||(F.st==="todo"&&!S.d.includes(n.id))||(F.st==="wdh"&&n.quiz.some(q=>S.w.includes(q.id)))));
 const pct=(arr)=>arr.length?Math.round(arr.filter(n=>S.d.includes(n.id)).length/arr.length*100):0;
@@ -200,7 +320,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-f],[data-s
  if(b.dataset.f==="all")F.f=["ER","K","V"];else if(b.dataset.f){const k=b.dataset.f;if(F.f.length===3)F.f=[k];else if(F.f.includes(k)){F.f=F.f.filter(x=>x!==k);if(!F.f.length)F.f=["ER","K","V"]}else F.f.push(k)}
  if(b.dataset.s)F.st=b.dataset.s;chips();route()});
 function nav(){const r=(location.hash.split("/")[1]||"");$("#nav").innerHTML=[["","Start"],["atlas","Lernatlas"],["polizeirecht","Polizeirecht"],["cards","Flashcards"],["paras","Norm-Index"],["glossar","Glossar"],["stoff","Stoffplan"],["quiz","Quiz"],["wdh","Wiederholen"+(S.w.length?" ("+S.w.length+")":"")]].map(([h,l])=>`<a href="#/${h}" ${r===h?'aria-current="page"':""}>${l}</a>`).join("")}
-function paint(){const all=N,p=pct(all);$("#ringc").style.strokeDashoffset=107-107*p/100;$("#ringt").textContent=p+"%";nav();const cur=$("#nav a[aria-current=page]");$("#mtitle").textContent=cur?cur.textContent:"Menü"}
+function paint(){const all=N,p=pct(all);$("#ringc").style.strokeDashoffset=107-107*p/100;$("#ringt").textContent=p+"%";nav();bnav();const cur=$("#nav a[aria-current=page]");$("#mtitle").textContent=cur?cur.textContent:"Menü"}
 // ---------- Views ----------
 function heat(list){return `<div class="heat">`+list.map((n,i)=>`<a href="#/atlas/${n.id}" class="${S.d.includes(n.id)?"d":""}" style="--c:${FACH[n.f].c}" title="${esc(n.title)}">${i+1}</a>`).join("")+`</div>`}
 function vStart(){const l=nuggets(),qd=ALLQ.length,qc=ALLQ.length-S.w.length;
@@ -210,7 +330,7 @@ function vStart(){const l=nuggets(),qd=ALLQ.length,qc=ALLQ.length-S.w.length;
  <div class="card"><h3 style="margin-top:0">Dein Fortschritt</h3><div class="bar" aria-hidden="true"><i style="width:${pct(N)}%"></i></div><p style="margin:.4em 0"><b>${S.d.length}</b> von ${N.length} Nuggets gelernt · Level ${lvl()+1}: <b>${esc(LEVELS[Math.min(lvl(),LEVELS.length-1)])}</b></p><div class="bar" aria-hidden="true" title="XP bis zum nächsten Level"><i style="width:${xp}%"></i></div><small class="norm">${S.x} XP · nächstes Level in ${100-xp} XP</small>
  <div class="stats"><div class="st"><b>🔥 ${S.s}</b><span>Tage-Serie</span></div><div class="st"><b>${S.k.length}/${ALLC.length}</b><span>Karten gewusst</span></div><div class="st"><b>${S.w.length}</b><span>zu wiederholen</span></div></div>
  ${S.w.length?`<p><a class="btn r" href="#/wdh">${S.w.length} falsche Fragen wiederholen</a></p>`:`<p class="mot">${S.a?"Keine offenen Fehler – stark! 🎯":"Starte mit dem ersten Nugget."}</p>`}</div></section>
- <section class="grid3">${["ER","K","V"].map(k=>{const L=N.filter(n=>n.f===k);const q=ALLQ.filter(x=>x.f===k);return `<article class="card fach" style="--c:${FACH[k].c}" tabindex="0" role="link" data-go="#/atlas/${L[0].id}"><div style="font-size:2rem">${FACH[k].icon}</div><h3>${FACH[k].n}</h3><small>${FACH[k].d}</small><div class="bar" style="margin:12px 0"><i style="width:${pct(L)}%"></i></div><small>${L.filter(n=>S.d.includes(n.id)).length}/${L.length} Nuggets · ${q.length} Fragen · ${ALLC.filter(c=>c.f===k).length} Karten</small></article>`}).join("")}</section>
+ ${(()=>{const n=N[Math.floor(Date.now()/864e5)%N.length];return n&&n.merke?`<div class="merke" style="margin:0 0 20px"><b>Merksatz des Tages · ${esc(n.title)}</b>${esc(n.merke)} <a href="#/atlas/${n.id}">Zum Nugget →</a></div>`:""})()}<section class="grid3">${["ER","K","V"].map(k=>{const L=N.filter(n=>n.f===k);const q=ALLQ.filter(x=>x.f===k);return `<article class="card fach" style="--c:${FACH[k].c}" tabindex="0" role="link" data-go="#/atlas/${L[0].id}"><div style="font-size:2rem">${FACH[k].icon}</div><h3>${FACH[k].n}</h3><small>${FACH[k].d}</small><div class="bar" style="margin:12px 0"><i style="width:${pct(L)}%"></i></div><small>${L.filter(n=>S.d.includes(n.id)).length}/${L.length} Nuggets · ${q.length} Fragen · ${ALLC.filter(c=>c.f===k).length} Karten</small></article>`}).join("")}</section>
  <section class="card" style="margin-top:20px"><h3 style="margin-top:0">Lernlandkarte <small class="norm">(${l.length} Nuggets im Filter · ausgefüllt = gelernt)</small></h3>${heat(l)}</section>`}
 let treeHidden=false;
 function vAtlas(id){const l=nuggets();let n=byId[id]||l[0]||N[0];
@@ -220,12 +340,12 @@ function vAtlas(id){const l=nuggets();let n=byId[id]||l[0]||N[0];
  const c=FACH[n.f].c,done=S.d.includes(n.id),i=N.indexOf(n);
  const seen=new Set(),dl=defLaw(n),RO=x=>rich(x,{seen,law:dl}),relc=(REL[n.id]||[]).map(i=>byId[i]).filter(Boolean),glc=GLOS.filter(e=>e[3].includes(n.id));
  $("#main").innerHTML=`<div class="layout${treeHidden?" nolist":""}"><aside class="tree" aria-label="Themenbaum"><details ${mq.matches?"":"open"}><summary class="tsum">📚 Themenbaum · ${esc(n.title)}</summary>${tree}</details></aside><article class="card" style="--c:${c}">${treeHidden?`<p class="wideonly" style="margin:0 0 10px"><button class="btn s" id="showtree">📚 Themenbaum einblenden</button></p>`:""}<span class="tag">${FACH[n.f].n}</span><span class="tag" style="background:var(--mute)">${esc(n.t)}</span><h2 style="font-size:1.8rem;margin:.3em 0">${esc(n.title)}</h2><div class="norm">${esc(n.norm)}</div>
- <h3>Kurzfassung</h3><p>${RO(n.kurz)}</p>${n.hinweis?`<div class="notice" style="border-style:solid;border-color:var(--c)">⚠️ <b>Hinweis:</b> ${esc(n.hinweis)}</div>`:""}<h3>Das musst du wissen</h3><ul class="kp">${n.punkte.map(p=>`<li>${RO(p)}</li>`).join("")}</ul><div class="merke">💡 <b>Merke:</b> ${RO(n.merke)}</div>${relc.length?`<h3>Verwandte Nuggets</h3><div class="row" style="gap:6px">${relc.map(x=>`<a class="chip" style="--c:${FACH[x.f].c};text-decoration:none;border-color:${FACH[x.f].c}" href="#/atlas/${x.id}">${FACH[x.f].icon} ${esc(x.title)}</a>`).join("")}</div>`:""}${glc.length?`<h3>Begriffe im Glossar</h3><div class="row" style="gap:6px">${glc.map(e=>`<a class="chip" style="text-decoration:none" href="#/glossar/${gslug(e[0])}">📖 ${esc(e[0])}</a>`).join("")}</div>`:""}${PROWS.some(c=>c.n===n.id)?`<h3>Paragrafen-Lernkarten</h3><div class="row" style="gap:6px">${PROWS.filter(c=>c.n===n.id).map(c=>`<a class="chip" style="--c:var(--accent);text-decoration:none" href="#/cards/${c.id}" title="${esc(c.t)}">${LAW[c.law].s} § ${esc(c.nr)}</a>`).join("")}</div>`:""}
+ <h3>Kurzfassung</h3><p>${RO(n.kurz)}</p>${n.hinweis?`<div class="notice" style="border-style:solid;border-color:var(--c)">⚠️ <b>Hinweis:</b> ${esc(n.hinweis)}</div>`:""}<h3>Das musst du wissen</h3><ul class="kp">${n.punkte.map(p=>`<li>${RO(p)}</li>`).join("")}</ul><div class="merke"><b>Merksatz</b>${RO(n.merke)}</div>${relc.length?`<h3>Verwandte Nuggets</h3><div class="row" style="gap:6px">${relc.map(x=>`<a class="chip" style="--c:${FACH[x.f].c};text-decoration:none;border-color:${FACH[x.f].c}" href="#/atlas/${x.id}">${FACH[x.f].icon} ${esc(x.title)}</a>`).join("")}</div>`:""}${glc.length?`<h3>Begriffe im Glossar</h3><div class="row" style="gap:6px">${glc.map(e=>`<a class="chip" style="text-decoration:none" href="#/glossar/${gslug(e[0])}">📖 ${esc(e[0])}</a>`).join("")}</div>`:""}${PROWS.some(c=>c.n===n.id)?`<h3>Paragrafen-Lernkarten</h3><div class="row" style="gap:6px">${PROWS.filter(c=>c.n===n.id).map(c=>`<a class="chip" style="--c:var(--accent);text-decoration:none" href="#/cards/${c.id}" title="${esc(c.t)}">${LAW[c.law].s} § ${esc(c.nr)}</a>`).join("")}</div>`:""}
  <h3>Prüfungsfragen</h3>${n.cards.map(x=>`<details style="margin:6px 0"><summary><b>${esc(x.q)}</b></summary><p style="margin:.4em 0 .8em">${RO(x.a)}</p></details>`).join("")}
  <div class="row" style="margin-top:18px"><button class="btn ${done?"s":"g"}" id="done">${done?"✓ Gelernt (zurücknehmen)":"Als gelernt markieren"}</button><a class="btn" href="#/quiz/${n.id}">Quiz zu diesem Nugget</a><a class="btn s" href="#/cards/${n.id}">Karten</a></div>
  <div class="row" style="margin-top:14px;justify-content:space-between">${N[i-1]?`<a href="#/atlas/${N[i-1].id}">← ${esc(N[i-1].title)}</a>`:"<span></span>"}${N[i+1]?`<a href="#/atlas/${N[i+1].id}">${esc(N[i+1].title)} →</a>`:""}</div></article></div>`;
  document.querySelectorAll(".tree a").forEach(a=>a.addEventListener("click",()=>{treeHidden=true}));const st=$("#showtree");if(st)st.onclick=()=>{treeHidden=false;vAtlas(n.id)};
- $("#done").onclick=()=>{if(done)S.d=S.d.filter(x=>x!==n.id);else{S.d.push(n.id);addXp(15);toast(PRAISE[Math.floor(Math.random()*PRAISE.length)]);if(pct(N.filter(x=>x.f===n.f))===100){toast("🏆 Fach "+FACH[n.f].n+" komplett!");confetti()}}touch();save();paint();vAtlas(n.id)}}
+ $("#done").onclick=()=>{if(done)S.d=S.d.filter(x=>x!==n.id);else{S.d.push(n.id);fxburst($("#done"),34);buzz(12);addXp(15);toast(PRAISE[Math.floor(Math.random()*PRAISE.length)]);if(pct(N.filter(x=>x.f===n.f))===100){toast("🏆 Fach "+FACH[n.f].n+" komplett!");confetti()}}touch();save();paint();vAtlas(n.id)}}
 function vParas(){
  const TH=[["⚖️ Polizei- & Ordnungsrecht (Sachsen)",["SächsPVDG","SächsPBG"]],["🔎 Strafprozessrecht",["StPO","GVG","RiStBV"]],["🧑‍⚖️ Strafrecht",["StGB","JGG"]],["📋 Ordnungswidrigkeitenrecht",["OWiG"]],["🚗 Straßenverkehrsrecht",["StVG","StVO","FeV","StVZO","FZV","PflVG","BKatV"]],["🏛️ Verfassungs- & Verwaltungsrecht",["GG","EMRK","VwVfG","VwGO","SächsVwVG"]],["🧪 Kriminalistik, Lehre & Sonstiges",[]]];
  const lawOf=x=>{const t=LAWTOK.concat(["GG","EMRK","RiStBV","SächsVwVG"]).find(l=>new RegExp("(^|[^\\p{L}])"+l+"(?![\\p{L}])","u").test(x));return t||null};
@@ -268,24 +388,24 @@ function drawCard(){const c=deck[di];
  const col=FACH[c.f].c;
  $("#main").innerHTML=`<div class="card" style="text-align:center;--c:${col}"><div class="row center"><span class="tag">${FACH[c.f].n}</span><small>Karte ${di+1} von ${deck.length} · Leertaste = umdrehen</small></div><div class="bar" style="max-width:640px;margin:8px auto"><i style="width:${di/deck.length*100}%"></i></div>
  <div class="flip ${flipped?"on":""}" id="flip" tabindex="0" role="button" aria-label="Karte umdrehen"><div class="fi"><div class="fc"><small style="font:.8rem Inter">FRAGE</small><div>${esc(c.q)}</div></div><div class="fc b"><small style="font:.8rem Inter">ANTWORT</small><div style="font-size:1.05rem">${esc(c.a)}</div></div></div></div>
- <div class="row center"><button class="btn r" id="no">Nochmal</button><button class="btn g" id="yes">Gewusst</button></div></div>`;
- const fl=()=>{flipped=!flipped;$("#flip").classList.toggle("on",flipped)};$("#flip").onclick=fl;
- const next=ok=>{flipped=false;if(ok){ds.k++;if(!S.k.includes(c.id)){S.k.push(c.id);addXp(2)}di++}else{ds.n++;S.k=S.k.filter(x=>x!==c.id);deck.push(deck.splice(di,1)[0])}touch();save();drawCard()};
+ <div class="row center"><button class="btn r" id="no">Nochmal</button><button class="btn g" id="yes">Gewusst</button></div><p class="swh">👆 Wischen: erst umdrehen, dann ← nochmal · gewusst →</p><div id="cm" style="max-width:640px;margin:14px auto 0;text-align:left"></div></div>`;
+ const nm=byId[c.n];window.__cm=()=>{const e=$("#cm");if(e)e.innerHTML=flipped&&nm&&nm.merke?`<div class="merke"><b>Merksatz · ${esc(nm.title)}</b>${esc(nm.merke)}</div>`:""};const fl=()=>{flipped=!flipped;$("#flip").classList.toggle("on",flipped);window.__cm()};$("#flip").onclick=fl;window.__cm();
+ const next=ok=>{if(ok){fxburst($("#yes"),18);buzz(10)}else buzz(25);flipped=false;if(ok){ds.k++;if(!S.k.includes(c.id)){S.k.push(c.id);addXp(2)}di++}else{ds.n++;S.k=S.k.filter(x=>x!==c.id);deck.push(deck.splice(di,1)[0])}touch();save();drawCard()};
  $("#yes").onclick=()=>next(1);$("#no").onclick=()=>next(0)}
 // Quiz
 let Q=null;
 function startQuiz(list,title,rep){Q={list:shuffle(list),i:0,ok:0,bad:0,title,rep,first:{}};drawQ()}
 function vQuiz(id){let l=id&&byId[id]?byId[id].quiz:ALLQ.filter(q=>F.f.includes(q.f));startQuiz(shuffle(l).slice(0,id?l.length:10),id&&byId[id]?byId[id].title:"Quiz",false)}
 function vWdh(){const l=ALLQ.filter(q=>S.w.includes(q.id)&&F.f.includes(q.f));if(!l.length){$("#main").innerHTML=`<div class="card" style="text-align:center"><h2>Nichts zu wiederholen 🎯</h2><p>Falsch beantwortete Fragen landen automatisch hier und kommen so lange wieder, bis du sie richtig beantwortest.</p><a class="btn" href="#/quiz">Quiz starten</a></div>`;return}startQuiz(l,"Wiederholung",true)}
-function drawQ(){if(Q.i>=Q.list.length){const t=Q.ok+Q.bad;const pc=t?Math.round(Q.ok/t*100):0;$("#main").innerHTML=`<div class="card" style="text-align:center"><h2>${esc(Q.title)}: geschafft!</h2><p style="font-size:2rem;margin:.2em">${pc}%</p><p>${Q.ok} richtig · ${Q.bad} Fehlversuche. ${pc>=80?"Prüfungsreif! 🏆":pc>=50?"Gute Basis – Wiederholen festigt!":"Dranbleiben – genau dafür gibt’s die Wiederholung."}</p><div class="row center"><a class="btn" href="#/quiz">Nochmal</a>${S.w.length?`<a class="btn r" href="#/wdh">${S.w.length} wiederholen</a>`:""}<a class="btn s" href="#/atlas">Zum Atlas</a></div></div>`;if(pc>=80)confetti();return}
+function drawQ(){if(Q.i>=Q.list.length){const t=Q.ok+Q.bad;const pc=t?Math.round(Q.ok/t*100):0;$("#main").innerHTML=`<div class="card" style="text-align:center"><h2>${esc(Q.title)}: geschafft!</h2><p style="font-size:2rem;margin:.2em">${pc}%</p><p>${Q.ok} richtig · ${Q.bad} Fehlversuche. ${pc>=80?"Prüfungsreif! 🏆":pc>=50?"Gute Basis – Wiederholen festigt!":"Dranbleiben – genau dafür gibt’s die Wiederholung."}</p><div class="merke" style="text-align:left;margin:14px 0"><b>Merksatz</b>${MOT[Math.floor(Math.random()*MOT.length)]}</div><div class="row center"><a class="btn" href="#/quiz">Nochmal</a>${S.w.length?`<a class="btn r" href="#/wdh">${S.w.length} wiederholen</a>`:""}<a class="btn s" href="#/atlas">Zum Atlas</a></div></div>`;if(pc>=80)confetti();return}
  const q=Q.list[Q.i],opts=shuffle(q.o.map((t,i)=>({t,ok:i===q.a})));const col=FACH[q.f].c;
  $("#main").innerHTML=`<div class="card" style="--c:${col};max-width:760px;margin:auto"><div class="row"><span class="tag">${FACH[q.f].n}</span><small>${esc(Q.title)} · Frage ${Math.min(Q.i+1,Q.list.length)} / ${Q.list.length}</small></div><div class="bar" style="margin:8px 0 14px"><i style="width:${Q.i/Q.list.length*100}%"></i></div><h3 style="margin-top:0">${esc(q.q)}</h3><div id="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${String.fromCharCode(65+i)}) ${esc(o.t)}</button>`).join("")}</div><div id="fb"></div></div>`;
  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const o=opts[+b.dataset.i];document.querySelectorAll(".opt").forEach((x,i)=>{x.disabled=true;if(opts[i].ok)x.classList.add("ok")});
   S.a++;const firstTry=!(q.id in Q.first);Q.first[q.id]=1;
-  if(o.ok){b.classList.add("ok");Q.ok++;if(S.w.includes(q.id)){S.w=S.w.filter(x=>x!==q.id);S.r++;addXp(8)}else addXp(firstTry?10:5);
-   $("#fb").innerHTML=`<div class="fb"><b>${PRAISE[Math.floor(Math.random()*PRAISE.length)]}</b> ${esc(q.e)}</div><button class="btn" id="nx" autofocus>Weiter</button>`;Q.i++}
-  else{b.classList.add("bad");Q.bad++;if(!S.w.includes(q.id))S.w.push(q.id);
-   $("#fb").innerHTML=`<div class="fb"><b>${NUDGE[Math.floor(Math.random()*NUDGE.length)]}</b><br>${esc(q.e)}<br><small>Diese Frage kommt noch einmal.</small></div><button class="btn" id="nx" autofocus>Weiter</button>`;Q.list.splice(Q.i,1);Q.list.push(q)}
+  if(o.ok){b.classList.add("ok");fxburst(b);buzz(10);Q.ok++;if(S.w.includes(q.id)){S.w=S.w.filter(x=>x!==q.id);S.r++;addXp(8)}else addXp(firstTry?10:5);
+   $("#fb").innerHTML=`<div class="merke"><b>Merksatz · ${PRAISE[Math.floor(Math.random()*PRAISE.length)]}</b>${esc(q.e)}</div><button class="btn" id="nx" autofocus>Weiter</button>`;Q.i++}
+  else{b.classList.add("bad");buzz([30,40,30]);Q.bad++;if(!S.w.includes(q.id))S.w.push(q.id);
+   $("#fb").innerHTML=`<div class="merke bad"><b>Merksatz · ${NUDGE[Math.floor(Math.random()*NUDGE.length)]}</b>${esc(q.e)}<br><small>Diese Frage kommt noch einmal.</small></div><button class="btn" id="nx" autofocus>Weiter</button>`;Q.list.splice(Q.i,1);Q.list.push(q)}
   touch();save();paint();$("#nx").onclick=drawQ})}
 function vSearch(t){t=t.toLowerCase();const r=N.filter(n=>(n.title+" "+n.norm+" "+n.kurz+" "+n.punkte.join(" ")+" "+n.cards.map(c=>c.q+c.a).join(" ")).toLowerCase().includes(t));
  const pr=PROWS.filter(c=>(LAW[c.law].s+" § "+c.nr+" "+c.t).toLowerCase().includes(t)).slice(0,30);
@@ -293,12 +413,12 @@ function vSearch(t){t=t.toLowerCase();const r=N.filter(n=>(n.title+" "+n.norm+" 
 // ---------- Router ----------
 function route(){const [,r,id]=location.hash.split("/");paint();window.scrollTo(0,0);
  if(r==="atlas"&&!id)treeHidden=false;if(r==="atlas")vAtlas(id);else if(r==="cards")vCards(id);else if(r==="polizeirecht")vPol(id);else if(r==="paras")vParas();else if(r==="glossar")vGlossar(id);else if(r==="stoff")vStoff();else if(r==="quiz")vQuiz(id);else if(r==="wdh")vWdh();else vStart();
- document.querySelectorAll("[data-go]").forEach(e=>{e.onclick=()=>location.hash=e.dataset.go;e.onkeydown=k=>{if(k.key==="Enter")location.hash=e.dataset.go}})}
+ pgIn();document.querySelectorAll("[data-go]").forEach(e=>{e.onclick=()=>location.hash=e.dataset.go;e.onkeydown=k=>{if(k.key==="Enter")location.hash=e.dataset.go}})}
 window.addEventListener("hashchange",route);
 document.addEventListener("keydown",e=>{const t=e.target.tagName;if(e.key==="/"&&t!=="INPUT"){e.preventDefault();$("#q").focus()}
- if(e.key===" "&&location.hash.startsWith("#/cards")&&t!=="BUTTON"&&$("#flip")){e.preventDefault();flipped=!flipped;$("#flip").classList.toggle("on",flipped)}});
+ if(e.key===" "&&location.hash.startsWith("#/cards")&&t!=="BUTTON"&&$("#flip")){e.preventDefault();flipped=!flipped;$("#flip").classList.toggle("on",flipped);window.__cm&&window.__cm()}});
 $("#q").addEventListener("input",e=>{const v=e.target.value.trim();if(v.length>1)vSearch(v);else route()});
-$("#theme").onclick=()=>{S.t=S.t==="dark"?"light":"dark";document.documentElement.dataset.theme=S.t;save()};
+$("#theme").onclick=()=>{const hr=document.documentElement;hr.classList.add("tt");setTimeout(()=>hr.classList.remove("tt"),550);S.t=S.t==="dark"?"light":"dark";document.documentElement.dataset.theme=S.t;save()};
 // consent & legal
 function cons(v){consent=v;sck("llc_c",v,365);$("#consent").hidden=true;if(v==="1"){save();toast("Fortschritt wird in einem Cookie gespeichert.")}else{sck("llc","",0);sck("llk","",0);toast("Nur für diese Sitzung – nichts wird gespeichert.")}}
 $("#cyes").onclick=()=>cons("1");$("#cno").onclick=()=>cons("0");
@@ -312,7 +432,7 @@ if(consent===null)$("#consent").hidden=false;
 // ---------- Mobiles Menü: einklappen per Tippen, Wischen, Scrollen ----------
 {const H=document.querySelector("header"),mt=$("#mt");let lock=0,ly=window.scrollY,ty=0,tx=0;
  const isC=()=>H.classList.contains("c");
- const setMenu=o=>{H.classList.toggle("c",!o);mt.setAttribute("aria-expanded",String(o));mt.querySelector(".mi").textContent=o?"✕":"☰";if(o)lock=Date.now()+600};
+ const setMenu=o=>{H.classList.toggle("c",!o);mt.setAttribute("aria-expanded",String(o));mt.querySelector(".mi").textContent=o?"✕":"☰";if(o){lock=Date.now()+600;window.__showHdr&&window.__showHdr()}};
  window.setMenu=setMenu;
  setMenu(!mq.matches);
  if(mq.addEventListener)mq.addEventListener("change",()=>setMenu(!mq.matches));
@@ -323,7 +443,35 @@ if(consent===null)$("#consent").hidden=false;
  window.addEventListener("scroll",()=>{const y=window.scrollY;if(mq.matches&&!isC()&&Date.now()>lock&&y>ly+6&&y>40&&document.activeElement!==$("#q"))setMenu(false);ly=y},{passive:true});
  H.addEventListener("touchstart",e=>{ty=e.touches[0].clientY;tx=e.touches[0].clientX},{passive:true});
  H.addEventListener("touchend",e=>{if(!mq.matches)return;const t=e.changedTouches[0],dy=t.clientY-ty,dx=t.clientX-tx;if(Math.abs(dy)<35||Math.abs(dx)>Math.abs(dy))return;if(dy<0&&!isC())setMenu(false);else if(dy>0&&isC())setMenu(true)},{passive:true})}
-chips();touch();route();
+
+// ---------- Kopfleiste ausblenden (Scroll, Ruhe), Wischgesten ----------
+{const H=document.querySelector("header"),root=document.documentElement,AHm=matchMedia("(min-width:721px) and (hover:hover) and (pointer:fine)");
+ let hid=false,lockT=0,idle=null,lastY=scrollY||0,scT=0;
+ const typing=()=>document.activeElement===$("#q");
+ const canHide=()=>AHm.matches||(mq.matches&&H.classList.contains("c"));
+ function setH(on){on=on&&canHide();if(on===hid)return;const h=H.offsetHeight;hid=on;lockT=Date.now()+650;H.classList.toggle("hid",on);H.style.marginBottom=on?(-h)+"px":"";root.style.setProperty("--hh",(on?0:h)+"px")}
+ window.__showHdr=()=>setH(false);
+ function arm(){clearTimeout(idle);if(!AHm.matches)return;idle=setTimeout(()=>{if(H.matches(":hover")||typing()){arm();return}setH(true)},4000)}
+ if("ResizeObserver" in window)new ResizeObserver(()=>{if(!hid)root.style.setProperty("--hh",H.offsetHeight+"px")}).observe(H);
+ document.addEventListener("mousemove",e=>{if(e.clientY<=36||H.matches(":hover")){setH(false);arm()}});
+ H.addEventListener("focusin",()=>{setH(false);arm()});
+ document.addEventListener("keydown",()=>{if(hid&&H.contains(document.activeElement))setH(false);arm()});
+ const reset=()=>{setH(false);clearTimeout(idle);arm()};
+ (AHm.addEventListener?AHm.addEventListener("change",reset):AHm.addListener(reset));
+ addEventListener("scroll",()=>{if(scT)return;scT=requestAnimationFrame(()=>{scT=0;const y=scrollY||0,d=y-lastY;if(Date.now()<lockT){lastY=y;return}
+  if(d>8&&y>120&&!typing())setH(true);else if(d<-8||(y<60&&mq.matches))setH(false);
+  if(Math.abs(d)>8)lastY=y;if(d<-8)arm()})},{passive:true});
+ arm();
+ // Wischen (nur Touch/Handy): Karten und Nuggets
+ let sx=0,sy=0,st=0,tg=null;
+ document.addEventListener("touchstart",e=>{if(e.touches.length!==1){tg=null;return}const t=e.touches[0];sx=t.clientX;sy=t.clientY;st=Date.now();tg=e.target},{passive:true});
+ document.addEventListener("touchend",e=>{if(!mq.matches||!tg||!tg.closest)return;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+  if(Date.now()-st>700||Math.abs(dx)<70||Math.abs(dy)>Math.abs(dx)*.6)return;
+  if(tg.closest("input,textarea,select,table,pre,header,#bnav,.filters,dialog,.tree,#consent"))return;
+  const h=location.hash;
+  if(h.startsWith("#/cards")&&$("#flip")){if(!flipped){flipped=true;$("#flip").classList.add("on");buzz(8)}else $(dx<0?"#no":"#yes").click();return}
+  const m=/^#\/atlas\/(.+)$/.exec(h);if(m&&byId[m[1]]){const n=N[N.indexOf(byId[m[1]])+(dx<0?1:-1)];if(n){buzz(8);location.hash="#/atlas/"+n.id}}},{passive:true})}
+chips();touch();route();updProg();
 })();
 </script>
 </body>
