@@ -201,6 +201,15 @@ details[open]>*:not(summary){animation:fxrise .35s ease both}
 .merke a{font-weight:600}
 .prow,.nrow{flex-wrap:wrap}
 .prow>*,.nrow>*{min-width:0;overflow-wrap:anywhere}
+/* Polizeirecht: Nuggets inline aufklappen */
+.ptog{flex:1;display:flex;align-items:baseline;gap:6px;justify-content:space-between;background:none;border:0;padding:0;margin:0;text-align:left;color:inherit;font:inherit;cursor:pointer}
+.ptog:hover span{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.ptog .chev{font-style:normal;color:var(--accent);transition:transform .25s;flex:none}
+.ptog[aria-expanded=true] .chev{transform:rotate(90deg)}
+.ptog[aria-expanded=true] span{font-weight:600}
+.pnug{flex:1 0 100%;margin:6px 0 8px;padding:12px 14px;background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;animation:fxrise .3s ease both}
+.pnug[hidden]{display:none}
+.prow.popen{background:color-mix(in srgb,var(--accent) 5%,transparent);border-radius:8px}
 </style>
 </head>
 <body>
@@ -316,7 +325,7 @@ const pct=(arr)=>arr.length?Math.round(arr.filter(n=>S.d.includes(n.id)).length/
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function chips(){$("#chips").innerHTML=["ER","K","V"].map(k=>`<button class="chip" style="--c:${FACH[k].c}" aria-pressed="${F.f.includes(k)}" data-f="${k}">${FACH[k].icon} ${k==="V"?"Verkehrsrecht":FACH[k].n} (${k})</button>`).join(" ")+` <button class="chip" data-f="all" aria-pressed="${F.f.length===3}">Alle</button>`;
  $("#schips").innerHTML=[["all","Alle"],["todo","Offen"],["done","Gelernt"],["wdh","Zu wiederholen"]].map(([k,l])=>`<button class="chip" data-s="${k}" aria-pressed="${F.st===k}">${l}</button>`).join(" ")}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-f],[data-s]");if(!b)return;
+document.addEventListener("click",e=>{const b=e.target.closest(".chip[data-f],.chip[data-s]");if(!b)return;
  if(b.dataset.f==="all")F.f=["ER","K","V"];else if(b.dataset.f){const k=b.dataset.f;if(F.f.length===3)F.f=[k];else if(F.f.includes(k)){F.f=F.f.filter(x=>x!==k);if(!F.f.length)F.f=["ER","K","V"]}else F.f.push(k)}
  if(b.dataset.s)F.st=b.dataset.s;chips();route()});
 function nav(){const r=(location.hash.split("/")[1]||"");$("#nav").innerHTML=[["","Start"],["atlas","Lernatlas"],["polizeirecht","Polizeirecht"],["cards","Flashcards"],["paras","Norm-Index"],["glossar","Glossar"],["stoff","Stoffplan"],["quiz","Quiz"],["wdh","Wiederholen"+(S.w.length?" ("+S.w.length+")":"")]].map(([h,l])=>`<a href="#/${h}" ${r===h?'aria-current="page"':""}>${l}</a>`).join("")}
@@ -374,7 +383,7 @@ function vPol(k){k=LAW[k]?k:"pvdg";const rows=PROWS.filter(c=>c.law===k),gs=[...
  <div class="row"><input id="pf" class="ib" style="flex:1;min-width:200px;padding:9px 12px" placeholder="Paragraf oder Stichwort filtern (z. B. 22, Gewahrsam)" aria-label="Paragrafen filtern"><a class="btn" href="#/cards/g${k}-all">Alle ${rows.length} Paragrafen-Karten üben</a></div></div>
  <div id="plist">${gs.map((g,gi)=>{const r=rows.filter(c=>c.g===g),core=/^Teil [12]|^Abschnitt [123]/.test(g),kn=r.filter(c=>S.k.includes(c.id)).length;
  return `<section class="card pg" style="margin-top:14px;--c:${core?"var(--er)":"var(--mute)"}"><div class="row" style="justify-content:space-between"><h3 style="margin:0">${esc(g)} <span class="tag" style="background:${core?"var(--er)":"var(--mute)"}">${core?"Prüfungskern":"Vertiefung"}</span></h3><span class="row"><small class="norm">${kn}/${r.length}</small><a class="btn s" style="padding:5px 12px" href="#/cards/g${k}-${gi}">Gruppe üben</a></span></div>
- <div style="margin-top:8px">${r.map(c=>`<div class="prow" data-s="${esc((c.nr+" "+c.t).toLowerCase())}" style="display:flex;gap:10px;align-items:baseline;padding:5px 0;border-top:1px solid var(--line)"><a class="chip" style="--c:var(--accent);white-space:nowrap;text-decoration:none;${S.k.includes(c.id)?"background:var(--ok);color:#fff;border-color:var(--ok)":""}" href="#/cards/${c.id}" title="Lernkarte zu § ${esc(c.nr)}">§ ${esc(c.nr)}</a><span style="flex:1">${esc(c.t)}</span>${byId[c.n]?`<a href="#/atlas/${c.n}" style="font-size:.8rem;white-space:nowrap" title="${esc(byId[c.n].title)}">📖 Nugget</a>`:""}</div>`).join("")}</div></section>`}).join("")}</div>`;
+ <div style="margin-top:8px">${r.map(c=>`<div class="prow" data-s="${esc((c.nr+" "+c.t).toLowerCase())}" style="display:flex;gap:10px;align-items:baseline;padding:5px 0;border-top:1px solid var(--line)"><a class="chip" style="--c:var(--accent);white-space:nowrap;text-decoration:none;${S.k.includes(c.id)?"background:var(--ok);color:#fff;border-color:var(--ok)":""}" href="#/cards/${c.id}" title="Lernkarte zu § ${esc(c.nr)}">§ ${esc(c.nr)}</a>${byId[c.n]?`<button class="ptog" data-nug="${c.id}" aria-expanded="false" title="Nugget aufklappen: ${esc(byId[c.n].title)}"><span>${esc(c.t)}</span><i class="chev" aria-hidden="true">▸</i></button><a href="#/atlas/${c.n}" style="font-size:.8rem;white-space:nowrap" title="Vollständiges Nugget: ${esc(byId[c.n].title)}">📖 Nugget</a><div class="pnug" hidden></div>`:`<span style="flex:1">${esc(c.t)}</span>`}</div>`).join("")}</div></section>`}).join("")}</div>`;
  $("#pf").oninput=e=>{const v=e.target.value.trim().toLowerCase().replace(/^§\s*/,"");document.querySelectorAll(".prow").forEach(x=>{const s=x.dataset.s;x.style.display=!v||s.includes(v)||s.split(" ")[0]===v?"":"none"});document.querySelectorAll(".pg").forEach(sec=>{sec.style.display=[...sec.querySelectorAll(".prow")].some(x=>x.style.display!=="none")?"":"none"})}}
 // Flashcards
 let deck=[],di=0,flipped=false,ds={};
@@ -410,6 +419,13 @@ function drawQ(){if(Q.i>=Q.list.length){const t=Q.ok+Q.bad;const pc=t?Math.round
 function vSearch(t){t=t.toLowerCase();const r=N.filter(n=>(n.title+" "+n.norm+" "+n.kurz+" "+n.punkte.join(" ")+" "+n.cards.map(c=>c.q+c.a).join(" ")).toLowerCase().includes(t));
  const pr=PROWS.filter(c=>(LAW[c.law].s+" § "+c.nr+" "+c.t).toLowerCase().includes(t)).slice(0,30);
  $("#main").innerHTML=`<div class="card"><h2 style="margin-top:0">Suche: „${esc(t)}“ <small class="norm">${r.length} Nuggets · ${pr.length} Paragrafen</small></h2>${pr.map(c=>`<p style="margin:.2em 0"><a class="chip" style="--c:var(--accent);text-decoration:none" href="#/cards/${c.id}">${LAW[c.law].s} § ${esc(c.nr)}</a> ${esc(c.t)}</p>`).join("")}${r.map(n=>`<p><a href="#/atlas/${n.id}"><span class="tag" style="--c:${FACH[n.f].c}">${n.f}</span>${esc(n.title)}</a><br><small class="norm">${esc(n.norm)}</small></p>`).join("")||"Keine Treffer."}</div>`}
+
+// Polizeirecht: Thema anklicken -> Nugget direkt aufklappen/zuklappen
+function pnugHtml(c){const n=byId[c.n];if(!n)return"";const seen=new Set(),dl=defLaw(n),RO=x=>rich(x,{seen,law:dl});
+ return `<div class="tag" style="--c:${FACH[n.f].c}">${FACH[n.f].n}</div> <b>${esc(n.title)}</b><div class="norm" style="margin:2px 0 8px">${esc(n.norm)}</div><h4 style="margin:.4em 0 .2em">Kurzfassung</h4><p style="margin:.2em 0">${RO(n.kurz)}</p><h4 style="margin:.8em 0 .2em">Das musst du wissen</h4><ul class="kp" style="margin:.2em 0;padding-left:1.2em">${n.punkte.map(p=>`<li>${RO(p)}</li>`).join("")}</ul>${n.merke?`<div class="merke" style="margin:12px 0 8px"><b>Merksatz</b>${RO(n.merke)}</div>`:""}<div class="row" style="margin-top:8px"><a class="btn" href="#/atlas/${n.id}">Ganzes Nugget öffnen</a><a class="btn s" href="#/quiz/${n.id}">Quiz</a><a class="btn s" href="#/cards/${c.id}">Karte</a></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest(".ptog");if(!b)return;const row=b.closest(".prow"),box=row.querySelector(".pnug"),c=PCARD[b.dataset.nug];if(!box||!c)return;
+ const open=box.hidden;if(open&&!box.innerHTML){box.innerHTML=pnugHtml(c);box.querySelectorAll(".rvl").forEach(x=>x.classList.remove("rvl"))}
+ box.hidden=!open;b.setAttribute("aria-expanded",String(open));row.classList.toggle("popen",open)});
 // ---------- Router ----------
 function route(){const [,r,id]=location.hash.split("/");paint();window.scrollTo(0,0);
  if(r==="atlas"&&!id)treeHidden=false;if(r==="atlas")vAtlas(id);else if(r==="cards")vCards(id);else if(r==="polizeirecht")vPol(id);else if(r==="paras")vParas();else if(r==="glossar")vGlossar(id);else if(r==="stoff")vStoff();else if(r==="quiz")vQuiz(id);else if(r==="wdh")vWdh();else vStart();
