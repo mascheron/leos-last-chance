@@ -210,6 +210,12 @@ details[open]>*:not(summary){animation:fxrise .35s ease both}
 .pnug{flex:1 0 100%;margin:6px 0 8px;padding:12px 14px;background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;animation:fxrise .3s ease both}
 .pnug[hidden]{display:none}
 .prow.popen{background:color-mix(in srgb,var(--accent) 5%,transparent);border-radius:8px}
+/* Themenbaum als Hover-Overlay (Desktop mit Maus) */
+body.tauto .layout,body.tauto .layout.nolist{grid-template-columns:minmax(0,1fr)}
+body.tauto .layout>article{max-width:900px;width:100%;margin:0 auto}
+body.tauto .wideonly{display:none!important}
+body.tauto .layout>.tree,body.tauto .layout.nolist>.tree{display:block;position:fixed;left:0;top:var(--hh,130px);height:calc(100vh - var(--hh,130px));max-height:none;width:min(320px,86vw);z-index:26;border-radius:0 16px 16px 0;transform:translateX(-102%);visibility:hidden;transition:transform .28s ease,top .3s ease,box-shadow .28s,visibility 0s .28s}
+body.tauto.tree-open .layout>.tree{transform:none;visibility:visible;box-shadow:6px 0 28px rgba(20,33,61,.22);transition:transform .28s ease,top .3s ease,box-shadow .28s,visibility 0s}
 </style>
 </head>
 <body>
@@ -466,7 +472,7 @@ if(consent===null)$("#consent").hidden=false;
  const typing=()=>document.activeElement===$("#q");
  const canHide=()=>AHm.matches||(mq.matches&&H.classList.contains("c"));
  function setH(on){on=on&&canHide();if(on===hid)return;const h=H.offsetHeight;hid=on;lockT=Date.now()+650;H.classList.toggle("hid",on);H.style.marginBottom=on?(-h)+"px":"";root.style.setProperty("--hh",(on?0:h)+"px")}
- window.__showHdr=()=>setH(false);
+ window.__showHdr=()=>setH(false);window.__hdrLockT=()=>lockT;
  function arm(){clearTimeout(idle);if(!AHm.matches)return;idle=setTimeout(()=>{if(H.matches(":hover")||typing()){arm();return}setH(true)},4000)}
  if("ResizeObserver" in window)new ResizeObserver(()=>{if(!hid)root.style.setProperty("--hh",H.offsetHeight+"px")}).observe(H);
  document.addEventListener("mousemove",e=>{if(e.clientY<=36||H.matches(":hover")){setH(false);arm()}});
@@ -487,6 +493,37 @@ if(consent===null)$("#consent").hidden=false;
   const h=location.hash;
   if(h.startsWith("#/cards")&&$("#flip")){if(!flipped){flipped=true;$("#flip").classList.add("on");buzz(8)}else $(dx<0?"#no":"#yes").click();return}
   const m=/^#\/atlas\/(.+)$/.exec(h);if(m&&byId[m[1]]){const n=N[N.indexOf(byId[m[1]])+(dx<0?1:-1)];if(n){buzz(8);location.hash="#/atlas/"+n.id}}},{passive:true})}
+
+// ---------- Themenbaum: Hover-Overlay links, Scroll schliesst, Taste B/T ----------
+{const AHt=matchMedia("(min-width:861px) and (hover:hover) and (pointer:fine)"),B=document.body;
+ let open=false,cl=null,sup=false,tScr=0,lastY=scrollY||0;
+ const T=()=>document.querySelector(".layout>.tree"),Hh=()=>document.querySelector("header");
+ const topH=()=>{const h=Hh();return h&&!h.classList.contains("hid")?h.offsetHeight:0};
+ const lk=()=>(window.__hdrLockT?window.__hdrLockT():0);
+ function sync(){B.classList.toggle("tauto",AHt.matches)}
+ function set(o){o=!!o&&AHt.matches&&!!T();open=o;B.classList.toggle("tree-open",o);if(!o)clearTimeout(cl)}
+ function hotX(){const a=document.querySelector(".layout>article"),l=a?a.getBoundingClientRect().left:0;return Math.max(40,l-12)}
+ document.addEventListener("mousemove",e=>{if(!AHt.matches||!T())return;
+  const inT=open&&T().contains(e.target),zone=e.clientX<hotX()&&e.clientY>topH()+2;
+  if(!zone&&!inT)sup=false;
+  if(sup&&zone&&Date.now()-tScr>450)sup=false;
+  if(inT){clearTimeout(cl);return}
+  if(zone&&!sup){clearTimeout(cl);if(!open)set(true);return}
+  if(open&&!zone){clearTimeout(cl);cl=setTimeout(()=>set(false),260)}},true);
+ document.addEventListener("mouseleave",()=>{if(open){clearTimeout(cl);cl=setTimeout(()=>set(false),260)}});
+ addEventListener("scroll",()=>{const y=scrollY||0,d=Math.abs(y-lastY);lastY=y;if(!open||Date.now()<lk()||d<3)return;sup=true;tScr=Date.now();set(false)},{passive:true});
+ addEventListener("hashchange",()=>{sup=true;tScr=Date.now();set(false)});
+ document.addEventListener("click",e=>{if(open&&e.target.closest(".tree a[href]")){sup=true;tScr=Date.now();set(false)}});
+ document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&open){sup=true;set(false);return}
+  if(e.ctrlKey||e.metaKey||e.altKey)return;const k=(e.key||"").toLowerCase();if(k!=="b"&&k!=="t")return;
+  const t=(e.composedPath&&e.composedPath()[0])||e.target;if(t&&(/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable))return;
+  const tr=T();if(!tr)return;e.preventDefault();
+  if(AHt.matches){sup=true;tScr=Date.now();clearTimeout(cl);set(!open)}
+  else{const d=tr.querySelector("details");if(d){d.open=!d.open;if(d.open)tr.scrollIntoView({block:"start",behavior:"smooth"})}}});
+ (AHt.addEventListener?AHt.addEventListener("change",()=>{sync();if(!AHt.matches)set(false)}):AHt.addListener(sync));
+ sync();
+}
 chips();touch();route();updProg();
 })();
 </script>
