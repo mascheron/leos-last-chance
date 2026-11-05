@@ -160,19 +160,19 @@ main.pg{animation:fxfade .3s ease both}
 }
 .btn:active,.chip:active,.opt:active,.fach:active,.heat a:active{transform:scale(.97)}
 .heat a{animation:fxtile .45s ease both;animation-delay:calc(var(--i,0)*14ms);transition:background-color .2s,box-shadow .2s}
-.heat a:not(.d):nth-child(9n+4){animation:fxtile .45s ease both,fxwiggle 3.4s ease-in-out 2s infinite}
+.heat a:not(.d):nth-child(9n+4){animation:fxtile .45s ease both,fxwiggle 1.2s ease-in-out 2s 1}
 .heat a:hover{box-shadow:0 4px 12px rgba(20,33,61,.2)}
 .opt.ok{animation:fxpop .45s ease,fxglow .8s ease-out}
 .opt.bad{animation:fxshake .42s ease}
 .fb{animation:fxrise .38s ease both}
 .flip{animation:fxrise .4s ease both}
 details[open]>*:not(summary){animation:fxrise .35s ease both}
-.merke,.notice{position:relative;overflow:hidden;animation:fxpulse 2.4s ease-in-out 2}
-.merke::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,var(--fxshine) 50%,transparent 62%);transform:translateX(-130%);animation:fxsweep 3s ease-in-out .5s 2;pointer-events:none}
-.merke>b:first-child{width:max-content;animation:fxbadge 2.4s ease-in-out 2;transform-origin:left center}
+.merke,.notice{position:relative;overflow:hidden;animation:fxpulse 2.4s ease-in-out 1}
+.merke::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,var(--fxshine) 50%,transparent 62%);transform:translateX(-130%);animation:fxsweep 3s ease-in-out .5s 1;pointer-events:none}
+.merke>b:first-child{width:max-content;animation:fxbadge 2.4s ease-in-out 1;transform-origin:left center}
 .merke strong{background:linear-gradient(transparent 60%,var(--fxmark) 0) no-repeat;background-size:0 100%;animation:fxmark .9s ease .3s forwards}
 .merke:not(.fxon),.merke:not(.fxon)::after,.merke:not(.fxon)>b:first-child,.merke:not(.fxon) strong,.notice:not(.fxon){animation-play-state:paused}
-.bar i{background-size:200% 100%;background-image:linear-gradient(90deg,var(--accent),var(--ok),var(--accent));animation:fxshimmer 6s linear infinite}
+.bar i{background-size:200% 100%;background-image:linear-gradient(90deg,var(--accent),var(--ok),var(--accent));animation:fxshimmer 6s linear 1}
 /* ===== Mobile ===== */
 #bnav{display:none}
 @media(max-width:720px){
@@ -194,7 +194,7 @@ details[open]>*:not(summary){animation:fxrise .35s ease both}
 .swh{display:none;text-align:center;font-size:.8rem;color:var(--mute);margin:.6em 0 0}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}.merke strong{background-size:100% 100%}.rvl{opacity:1;transform:none}}
 @media print{*,*::before,*::after{animation:none!important}.rvl{opacity:1!important;transform:none!important}#bnav,#sprog{display:none!important}}
-/* Merksatz-Varianten (Animation: 2 Durchläufe, startet beim Sichtbarwerden) */
+/* Merksatz-Varianten (Animation: 1 Durchlauf, startet beim Sichtbarwerden) */
 .merke>b:first-child{display:block;margin-bottom:2px}
 .merke.bad{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--card));--fxc:var(--bad)}
 .merke.bad>b:first-child{color:var(--bad)}
