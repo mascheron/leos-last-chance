@@ -216,6 +216,11 @@ body.tauto .layout>article{max-width:900px;width:100%;margin:0 auto}
 body.tauto .wideonly{display:none!important}
 body.tauto .layout>.tree,body.tauto .layout.nolist>.tree{display:block;position:fixed;left:0;top:var(--hh,130px);height:calc(100vh - var(--hh,130px));max-height:none;width:min(320px,86vw);z-index:26;border-radius:0 16px 16px 0;transform:translateX(-102%);visibility:hidden;transition:transform .28s ease,top .3s ease,box-shadow .28s,visibility 0s .28s}
 body.tauto.tree-open .layout>.tree{transform:none;visibility:visible;box-shadow:6px 0 28px rgba(20,33,61,.22);transition:transform .28s ease,top .3s ease,box-shadow .28s,visibility 0s}
+#treeHint{display:none}
+body.tauto:not(.tree-open) #treeHint.on{display:flex;position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:20;align-items:center;writing-mode:vertical-rl;padding:14px 6px;background:var(--card);border:1px solid var(--line);border-left:0;border-radius:0 10px 10px 0;font:700 12px/1 inherit;color:var(--mute);letter-spacing:.08em;box-shadow:var(--sh);cursor:pointer;animation:fxhint 1.6s ease 1.2s 1}
+@keyframes fxhint{0%,100%{translate:0 0}30%{translate:6px 0}60%{translate:2px 0}}
+@media print,(prefers-reduced-motion:reduce){#treeHint{animation:none!important}}
+@media print{#treeHint{display:none!important}}
 </style>
 </head>
 <body>
@@ -500,8 +505,12 @@ if(consent===null)$("#consent").hidden=false;
  const T=()=>document.querySelector(".layout>.tree"),Hh=()=>document.querySelector("header");
  const topH=()=>{const h=Hh();return h&&!h.classList.contains("hid")?h.offsetHeight:0};
  const lk=()=>(window.__hdrLockT?window.__hdrLockT():0);
- function sync(){B.classList.toggle("tauto",AHt.matches)}
- function set(o){o=!!o&&AHt.matches&&!!T();open=o;B.classList.toggle("tree-open",o);if(!o)clearTimeout(cl)}
+ const hint=document.createElement("button");hint.id="treeHint";hint.type="button";hint.textContent="Themen ▸";hint.setAttribute("aria-label","Themenbaum einblenden (Taste B oder T)");document.body.appendChild(hint);
+ function updHint(){hint.classList.toggle("on",AHt.matches&&!!T()&&!open)}
+ hint.addEventListener("click",()=>{sup=true;tScr=Date.now();set(true)});
+ if("MutationObserver" in window)new MutationObserver(updHint).observe(document.getElementById("main"),{childList:true});
+ function sync(){B.classList.toggle("tauto",AHt.matches);updHint()}
+ function set(o){o=!!o&&AHt.matches&&!!T();open=o;B.classList.toggle("tree-open",o);if(!o)clearTimeout(cl);updHint()}
  function hotX(){const a=document.querySelector(".layout>article"),l=a?a.getBoundingClientRect().left:0;return Math.max(40,l-12)}
  document.addEventListener("mousemove",e=>{if(!AHt.matches||!T())return;
   const inT=open&&T().contains(e.target),zone=e.clientX<hotX()&&e.clientY>topH()+2;
@@ -522,7 +531,7 @@ if(consent===null)$("#consent").hidden=false;
   if(AHt.matches){sup=true;tScr=Date.now();clearTimeout(cl);set(!open)}
   else{const d=tr.querySelector("details");if(d){d.open=!d.open;if(d.open)tr.scrollIntoView({block:"start",behavior:"smooth"})}}});
  (AHt.addEventListener?AHt.addEventListener("change",()=>{sync();if(!AHt.matches)set(false)}):AHt.addListener(sync));
- sync();
+ sync();updHint();
 }
 chips();touch();route();updProg();
 })();
